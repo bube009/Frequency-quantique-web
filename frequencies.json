@@ -1,0 +1,23 @@
+[
+  {
+    "id": "elem_hydrogene",
+    "name": "Hydrogène",
+    "category": "Élément chimique",
+    "frequencyHz": 432,
+    "durationSec": 600
+  },
+  {
+    "id": "elem_oxygene",
+    "name": "Oxygène",
+    "category": "Élément chimique",
+    "frequencyHz": 528,
+    "durationSec": 600
+  },
+  {
+    "id": "org_coeur",
+    "name": "Cœur",
+    "category": "Organe",
+    "frequencyHz": 639,
+    "durationSec": 900
+  }
+]
