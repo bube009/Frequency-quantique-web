@@ -7,6 +7,7 @@ body {
   font-family: system-ui, -apple-system, "SF Pro Text", sans-serif;
   background: #020617;
   color: #e5e7eb;
+  transition: background 0.6s ease, background-image 0.6s ease;
 }
 
 header {
@@ -19,7 +20,7 @@ header {
 main {
   padding: 16px;
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0 auto 80px auto;
 }
 
 #search {
@@ -39,22 +40,143 @@ ul#list {
 }
 
 ul#list li {
-  padding: 12px;
-  border: 1px solid #1f2937;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  background: #0f172a;
+  margin-bottom: 10px;
 }
 
-button {
+.freq-item {
+  padding: 12px;
+  border-radius: 12px;
+  background: #0f172a;
+  border: 1px solid #1f2937;
+}
+
+.freq-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.freq-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.freq-meta {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.freq-btn {
   padding: 8px 14px;
-  border-radius: 8px;
+  border-radius: 999px;
+  border: none;
   background: #4b7bec;
   color: white;
-  border: none;
-  margin-top: 10px;
+  font-weight: 600;
 }
 
 .hidden {
   display: none;
+}
+
+#detail {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #020617;
+  border: 1px solid #1f2937;
+}
+
+#detail h2 {
+  margin: 0 0 6px 0;
+}
+
+.detail-line {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.detail-duration {
+  font-size: 13px;
+  margin: 4px 0;
+  color: #a5b4fc;
+}
+
+.detail-notes {
+  font-size: 13px;
+  margin: 6px 0 10px 0;
+  color: #e5e7eb;
+}
+
+#play-btn {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  color: white;
+  font-weight: 600;
+}
+
+/* Panneau "lecture en cours" */
+
+.now-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 16px 14px;
+  background: rgba(15, 23, 42, 0.95);
+  border-top: 1px solid #1e293b;
+  backdrop-filter: blur(12px);
+  font-size: 13px;
+}
+
+.np-title {
+  font-weight: 600;
+}
+
+.np-info {
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+.np-timer {
+  color: #a5b4fc;
+  margin-top: 4px;
+}
+
+/* Mode "ange guérisseur" */
+
+body.angel-mode {
+  background: radial-gradient(circle at top, #1d2238 0, #020617 55%, #020618 100%);
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(180, 191, 255, 0.08) 0, transparent 55%),
+    radial-gradient(circle at 80% 0%, rgba(244, 219, 255, 0.12) 0, transparent 60%);
+}
+
+body.angel-mode header {
+  background: rgba(15, 23, 42, 0.98);
+}
+
+body.angel-mode .now-panel {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.9), rgba(236, 72, 153, 0.88));
+  border-top-color: rgba(191, 219, 254, 0.4);
+}
+
+body.angel-mode .np-title {
+  color: #f9fafb;
+}
+
+body.angel-mode .np-info,
+body.angel-mode .np-timer {
+  color: #e0f2fe;
+}
+
+footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 12px;
+  color: #6b7280;
 }
