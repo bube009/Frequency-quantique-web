@@ -19,5 +19,87 @@
     "category": "Organe",
     "frequencyHz": 639,
     "durationSec": 900
+  [
+  {
+    "id": "org_foie",
+    "name": "Foie",
+    "category": "Organe",
+    "group": "Organes",
+    "frequencyHz": 832,
+    "durationSec": 600,
+    "notes": "Détoxication, métaux lourds, harmonisation hépatique."
+  },
+  {
+    "id": "org_pancreas",
+    "name": "Pancréas",
+    "category": "Organe",
+    "group": "Organes",
+    "frequencyHz": 3724,
+    "durationSec": 600,
+    "notes": "Régulation glycémique, soutien enzymatique."
+  },
+  {
+    "id": "org_hypothalamus",
+    "name": "Hypothalamus",
+    "category": "Organe",
+    "group": "Organes",
+    "frequencyHz": 999,
+    "durationSec": 600,
+    "notes": "Chef d’orchestre hormonal, thermorégulation, libido."
+  },
+  {
+    "id": "org_thymus",
+    "name": "Thymus",
+    "category": "Organe",
+    "group": "Organes",
+    "frequencyHz": 2442,
+    "durationSec": 600,
+    "notes": "Système immunitaire, vitalité, modulation immunitaire."
+  },
+  {
+    "id": "org_oeil",
+    "name": "Globe oculaire",
+    "category": "Organe",
+    "group": "Organes",
+    "frequencyHz": 1472,
+    "durationSec": 600,
+    "notes": "Vision, glaucome, fatigue visuelle."
+  },
+
+  {
+    "id": "neuro_dopamine",
+    "name": "Dopamine",
+    "category": "Neurotransmetteur",
+    "group": "Neurotransmetteurs",
+    "frequencyHz": 852,
+    "durationSec": 600,
+    "notes": "Motivation, plaisir, réduction de la fatigue mentale."
+  },
+  {
+    "id": "neuro_serotonine",
+    "name": "Sérotonine",
+    "category": "Neurotransmetteur",
+    "group": "Neurotransmetteurs",
+    "frequencyHz": 741,
+    "durationSec": 600,
+    "notes": "Humeur, anxiété, stabilisation émotionnelle."
+  },
+  {
+    "id": "neuro_gaba",
+    "name": "GABA",
+    "category": "Neurotransmetteur",
+    "group": "Neurotransmetteurs",
+    "frequencyHz": 432,
+    "durationSec": 600,
+    "notes": "Relaxation profonde, anxiolytique naturel."
+  },
+  {
+    "id": "neuro_melatonine",
+    "name": "Mélatonine",
+    "category": "Neurotransmetteur",
+    "group": "Neurotransmetteurs",
+    "frequencyHz": 963,
+    "durationSec": 600,
+    "notes": "Sommeil profond, synchronisation circadienne."
   }
 ]
