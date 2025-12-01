@@ -70,7 +70,7 @@
     "group": "Neurotransmetteurs",
     "frequencyHz": 432,
     "durationSec": 600,
-    "notes": "Relaxation profonde, anxiolytique naturel."
+    "notes": "Relaxation profonde, apaisement nerveux."
   },
   {
     "id": "neuro_melatonine",
@@ -79,7 +79,7 @@
     "group": "Neurotransmetteurs",
     "frequencyHz": 963,
     "durationSec": 600,
-    "notes": "Sommeil profond, synchronisation circadienne."
+    "notes": "Sommeil profond, rythmes circadiens."
   },
 
   {
@@ -89,7 +89,7 @@
     "group": "Minéraux",
     "frequencyHz": 0,
     "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence de ton grimoire (os, dents, transmission nerveuse)."
+    "notes": "À compléter avec ta valeur (os, dents, transmission nerveuse)."
   },
   {
     "id": "min_magnesium",
@@ -98,7 +98,7 @@
     "group": "Minéraux",
     "frequencyHz": 0,
     "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence (relaxation musculaire, stress, sommeil)."
+    "notes": "À compléter (relaxation musculaire, stress, sommeil)."
   },
   {
     "id": "min_zinc",
@@ -107,7 +107,7 @@
     "group": "Minéraux",
     "frequencyHz": 0,
     "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence (immunité, cicatrisation, hormones)."
+    "notes": "À compléter (immunité, cicatrisation)."
   },
   {
     "id": "min_fer",
@@ -116,7 +116,7 @@
     "group": "Minéraux",
     "frequencyHz": 0,
     "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence (hémoglobine, oxygénation)."
+    "notes": "À compléter (hémoglobine, oxygénation)."
   },
   {
     "id": "min_iode",
@@ -125,7 +125,7 @@
     "group": "Minéraux",
     "frequencyHz": 0,
     "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence (thyroïde, métabolisme)."
+    "notes": "À compléter (thyroïde, métabolisme)."
   },
   {
     "id": "min_selenium",
@@ -134,6 +134,43 @@
     "group": "Minéraux",
     "frequencyHz": 0,
     "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence (antioxydant, protection cellulaire)."
+    "notes": "À compléter (antioxydant, protection cellulaire)."
+  },
+
+  {
+    "id": "angel_raphael",
+    "name": "Ange Raphaël",
+    "category": "Ange guérisseur",
+    "group": "Anges",
+    "frequencyHz": 528,
+    "durationSec": 600,
+    "notes": "Traditionnellement associé à la guérison et à la régénération (usage spirituel / bien-être)."
+  },
+  {
+    "id": "angel_michael",
+    "name": "Ange Michaël",
+    "category": "Ange guérisseur",
+    "group": "Anges",
+    "frequencyHz": 741,
+    "durationSec": 600,
+    "notes": "Protection, purification, coupure des liens lourds (usage spirituel / bien-être)."
+  },
+  {
+    "id": "angel_gabriel",
+    "name": "Ange Gabriel",
+    "category": "Ange guérisseur",
+    "group": "Anges",
+    "frequencyHz": 852,
+    "durationSec": 600,
+    "notes": "Clarté, guidance intérieure et communication (usage spirituel / bien-être)."
+  },
+  {
+    "id": "angel_uriel",
+    "name": "Ange Uriel",
+    "category": "Ange guérisseur",
+    "group": "Anges",
+    "frequencyHz": 396,
+    "durationSec": 600,
+    "notes": "Libération des peurs et des culpabilités, ancrage (usage spirituel / bien-être)."
   }
 ]
