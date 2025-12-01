@@ -1,11 +1,32 @@
+let currentOscillator = null;
 let audioCtx = null;
-let osc = null;
-let currentFreq = null;
-let stopTimeout = null;
 
-async function loadData() {
-  const res = await fetch('frequencies.json');
-  return await res.json();
+function startFrequency(freq) {
+  // Crée le contexte audio s'il n'existe pas
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  // Arrête automatiquement l'ancienne fréquence
+  if (currentOscillator) {
+    try {
+      currentOscillator.stop();
+    } catch (e) {}
+  }
+
+  // Crée un nouvel oscillateur
+  const osc = audioCtx.createOscillator();
+  osc.type = "sine";
+  osc.frequency.value = freq;
+
+  // Connecte au haut-parleur
+  osc.connect(audioCtx.destination);
+
+  // Démarre
+  osc.start();
+
+  // Sauvegarde l'oscillateur actif
+  currentOscillator = osc;
 }
 
 function renderList(data) {
