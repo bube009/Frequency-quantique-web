@@ -3,7 +3,8 @@ let currentOscillator = null;
 let currentItem = null;
 let remainingSec = 0;
 let timerInterval = null;
-
+let currentOscillator = null;
+let audioCtx = null; 
 // Charge les données depuis frequencies.json
 async function loadData() {
   const res = await fetch("frequencies.json");
