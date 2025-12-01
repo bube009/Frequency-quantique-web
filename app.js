@@ -198,3 +198,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.getElementById("play-btn").addEventListener("click", startSession);
 });
+function stopFrequency() {
+  if (currentOscillator) {
+    try { currentOscillator.stop(); } catch(e) {}
+    currentOscillator = null;
+  }
+
+  // Mise à jour UI
+  document.getElementById("nowPlaying").innerText = "Aucune fréquence en cours";
+  document.getElementById("stopContainer").style.display = "none";
+}
