@@ -6,7 +6,7 @@
     "group": "Organes",
     "frequencyHz": 832,
     "durationSec": 600,
-    "notes": "Détoxication, métaux lourds, harmonisation hépatique."
+    "notes": "Centre de la détoxication, métaux lourds, médicaments, polluants."
   },
   {
     "id": "org_pancreas",
@@ -15,7 +15,7 @@
     "group": "Organes",
     "frequencyHz": 3724,
     "durationSec": 600,
-    "notes": "Régulation glycémique, soutien enzymatique."
+    "notes": "Régulation du glucose, de l’insuline et des enzymes digestives."
   },
   {
     "id": "org_hypothalamus",
@@ -24,7 +24,7 @@
     "group": "Organes",
     "frequencyHz": 999,
     "durationSec": 600,
-    "notes": "Chef d’orchestre hormonal, thermorégulation, libido."
+    "notes": "Chef d’orchestre hormonal, température, appétit, libido."
   },
   {
     "id": "org_thymus",
@@ -33,7 +33,7 @@
     "group": "Organes",
     "frequencyHz": 2442,
     "durationSec": 600,
-    "notes": "Système immunitaire, vitalité, modulation immunitaire."
+    "notes": "Glande de l’immunité vibratoire, pathologies auto-immunes, fatigue post-virale."
   },
   {
     "id": "org_oeil",
@@ -42,7 +42,7 @@
     "group": "Organes",
     "frequencyHz": 1472,
     "durationSec": 600,
-    "notes": "Vision, glaucome, fatigue visuelle."
+    "notes": "Glaucome, dégénérescence maculaire, fatigue visuelle."
   },
 
   {
@@ -50,36 +50,63 @@
     "name": "Dopamine",
     "category": "Neurotransmetteur",
     "group": "Neurotransmetteurs",
-    "frequencyHz": 852,
+    "frequencyHz": 5777,
     "durationSec": 600,
-    "notes": "Motivation, plaisir, réduction de la fatigue mentale."
+    "notes": "Voie dopaminergique, motivation, sortie de la dépression vibratoire."
   },
   {
     "id": "neuro_serotonine",
     "name": "Sérotonine",
     "category": "Neurotransmetteur",
     "group": "Neurotransmetteurs",
-    "frequencyHz": 741,
+    "frequencyHz": 5588,
     "durationSec": 600,
-    "notes": "Humeur, anxiété, stabilisation émotionnelle."
+    "notes": "Stabilisation de l’humeur, anxiété, troubles émotionnels."
   },
   {
     "id": "neuro_gaba",
     "name": "GABA",
     "category": "Neurotransmetteur",
     "group": "Neurotransmetteurs",
-    "frequencyHz": 432,
+    "frequencyHz": 4444,
     "durationSec": 600,
-    "notes": "Relaxation profonde, apaisement nerveux."
+    "notes": "Inhibiteur majeur, apaisement nerveux, anxiété, insomnie."
   },
   {
     "id": "neuro_melatonine",
     "name": "Mélatonine",
     "category": "Neurotransmetteur",
     "group": "Neurotransmetteurs",
-    "frequencyHz": 963,
+    "frequencyHz": 4444,
     "durationSec": 600,
-    "notes": "Sommeil profond, rythmes circadiens."
+    "notes": "Sommeil profond, rééquilibrage de la glande pinéale."
+  },
+  {
+    "id": "neuro_acetylcholine",
+    "name": "Acétylcholine",
+    "category": "Neurotransmetteur",
+    "group": "Neurotransmetteurs",
+    "frequencyHz": 5888,
+    "durationSec": 600,
+    "notes": "Mémoire, motricité fine, concentration."
+  },
+  {
+    "id": "neuro_noradrenaline",
+    "name": "Noradrénaline",
+    "category": "Neurotransmetteur",
+    "group": "Neurotransmetteurs",
+    "frequencyHz": 5632,
+    "durationSec": 600,
+    "notes": "Énergie, réactivité, tonus du système nerveux sympathique."
+  },
+  {
+    "id": "neuro_histamine",
+    "name": "Histamine",
+    "category": "Neurotransmetteur",
+    "group": "Neurotransmetteurs",
+    "frequencyHz": 3492,
+    "durationSec": 600,
+    "notes": "Modulation des réponses allergiques et inflammatoires (vision vibratoire)."
   },
 
   {
@@ -87,54 +114,172 @@
     "name": "Calcium",
     "category": "Minéral",
     "group": "Minéraux",
-    "frequencyHz": 0,
+    "frequencyHz": 3024,
     "durationSec": 600,
-    "notes": "À compléter avec ta valeur (os, dents, transmission nerveuse)."
+    "notes": "Minéral principal de l’os, conduction nerveuse, spasmes."
   },
   {
     "id": "min_magnesium",
     "name": "Magnésium",
     "category": "Minéral",
     "group": "Minéraux",
-    "frequencyHz": 0,
+    "frequencyHz": 1872,
     "durationSec": 600,
-    "notes": "À compléter (relaxation musculaire, stress, sommeil)."
+    "notes": "Anti-stress, sommeil, fatigue chronique, plus de 300 réactions enzymatiques."
   },
   {
     "id": "min_zinc",
     "name": "Zinc",
     "category": "Minéral",
     "group": "Minéraux",
-    "frequencyHz": 0,
+    "frequencyHz": 5472,
     "durationSec": 600,
-    "notes": "À compléter (immunité, cicatrisation)."
+    "notes": "Catalyseur immunitaire, cicatrisation, enzymes digestives."
   },
   {
     "id": "min_fer",
     "name": "Fer",
     "category": "Minéral",
     "group": "Minéraux",
-    "frequencyHz": 0,
+    "frequencyHz": 756,
     "durationSec": 600,
-    "notes": "À compléter (hémoglobine, oxygénation)."
+    "notes": "Transport de l’oxygène, anémie, manque de vitalité."
   },
   {
     "id": "min_iode",
     "name": "Iode",
     "category": "Minéral",
     "group": "Minéraux",
-    "frequencyHz": 0,
+    "frequencyHz": 1976,
     "durationSec": 600,
-    "notes": "À compléter (thyroïde, métabolisme)."
+    "notes": "Thyroïde, métabolisme, vitesse des fonctions neurologiques."
   },
   {
     "id": "min_selenium",
     "name": "Sélénium",
     "category": "Minéral",
     "group": "Minéraux",
-    "frequencyHz": 0,
+    "frequencyHz": 6048,
     "durationSec": 600,
-    "notes": "À compléter (antioxydant, protection cellulaire)."
+    "notes": "Antioxydant profond, cofacteur du glutathion."
+  },
+  {
+    "id": "min_bore",
+    "name": "Bore",
+    "category": "Minéral",
+    "group": "Minéraux",
+    "frequencyHz": 6912,
+    "durationSec": 600,
+    "notes": "Rétention du calcium, soutien hormonal et osseux."
+  },
+  {
+    "id": "min_strontium",
+    "name": "Strontium",
+    "category": "Minéral",
+    "group": "Minéraux",
+    "frequencyHz": 9216,
+    "durationSec": 600,
+    "notes": "Densité minérale osseuse, ostéoporose."
+  },
+
+  {
+    "id": "elt_hydrogene",
+    "name": "Hydrogène",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 432,
+    "durationSec": 600,
+    "notes": "Équilibre acido-basique, réactions de l’ATP, harmonisation globale."
+  },
+  {
+    "id": "elt_helium",
+    "name": "Hélium",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 872,
+    "durationSec": 600,
+    "notes": "Apaisement, impression de flottement, soutien des protocoles anti-anxiété."
+  },
+  {
+    "id": "elt_carbone",
+    "name": "Carbone",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 836,
+    "durationSec": 600,
+    "notes": "Base de toutes les molécules organiques, régénération cellulaire profonde."
+  },
+  {
+    "id": "elt_oxygene",
+    "name": "Oxygène",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 1264,
+    "durationSec": 600,
+    "notes": "Respiration cellulaire, fatigue, concentration."
+  },
+  {
+    "id": "elt_azote",
+    "name": "Azote",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 2562,
+    "durationSec": 600,
+    "notes": "Synthèse des protéines et des neurotransmetteurs."
+  },
+  {
+    "id": "elt_fluor",
+    "name": "Fluor",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 1363,
+    "durationSec": 600,
+    "notes": "Tissus durs, émail, support osseux."
+  },
+  {
+    "id": "elt_sodium",
+    "name": "Sodium",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 1728,
+    "durationSec": 600,
+    "notes": "Équilibre osmotique, tension artérielle."
+  },
+  {
+    "id": "elt_potassium",
+    "name": "Potassium",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 3744,
+    "durationSec": 600,
+    "notes": "Rythme cardiaque, flux neuronaux."
+  },
+  {
+    "id": "elt_phosphore",
+    "name": "Phosphore",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 2572,
+    "durationSec": 600,
+    "notes": "Mémoire, concentration, ATP."
+  },
+  {
+    "id": "elt_soufre",
+    "name": "Soufre",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 2786,
+    "durationSec": 600,
+    "notes": "Détoxication, précurseur du glutathion."
+  },
+  {
+    "id": "elt_chlore",
+    "name": "Chlore",
+    "category": "Élément",
+    "group": "Éléments chimiques",
+    "frequencyHz": 1056,
+    "durationSec": 600,
+    "notes": "Digestion, immunité intestinale, équilibre du pH."
   },
 
   {
@@ -144,7 +289,7 @@
     "group": "Anges",
     "frequencyHz": 528,
     "durationSec": 600,
-    "notes": "Traditionnellement associé à la guérison et à la régénération (usage spirituel / bien-être)."
+    "notes": "Guérison, régénération – usage spirituel/bien-être (symbolique)."
   },
   {
     "id": "angel_michael",
@@ -153,7 +298,7 @@
     "group": "Anges",
     "frequencyHz": 741,
     "durationSec": 600,
-    "notes": "Protection, purification, coupure des liens lourds (usage spirituel / bien-être)."
+    "notes": "Protection, purification – usage spirituel/bien-être (symbolique)."
   },
   {
     "id": "angel_gabriel",
@@ -162,7 +307,7 @@
     "group": "Anges",
     "frequencyHz": 852,
     "durationSec": 600,
-    "notes": "Clarté, guidance intérieure et communication (usage spirituel / bien-être)."
+    "notes": "Guidance intérieure, communication – usage spirituel/bien-être (symbolique)."
   },
   {
     "id": "angel_uriel",
@@ -171,6 +316,4 @@
     "group": "Anges",
     "frequencyHz": 396,
     "durationSec": 600,
-    "notes": "Libération des peurs et des culpabilités, ancrage (usage spirituel / bien-être)."
-  }
-]
+    "notes": "Libération des peurs, ancrage – usage spirituel/bien-être (symbolique)."
