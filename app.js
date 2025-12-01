@@ -36,17 +36,6 @@ function showDetail(item) {
   document.getElementById('detail').classList.remove('hidden');
 }
 
-function stopSound() {
-  if (osc) {
-    osc.stop();
-    osc.disconnect();
-    osc = null;
-  }
-  if (audioCtx) {
-    audioCtx.close();
-    audioCtx = null;
-  }
-  if (stopTimeout) clearTimeout(stopTimeout);
 
   document.getElementById('play-btn').disabled = false;
   document.getElementById('stop-btn').disabled = true;
