@@ -18,11 +18,20 @@
 
     <section id="detail" class="hidden">
       <h2 id="detail-name"></h2>
-      <p id="detail-category"></p>
-      <p id="detail-frequency"></p>
-      <p id="detail-duration"></p>
+      <p class="detail-line">
+        <span id="detail-category"></span> —
+        <span id="detail-frequency"></span>
+      </p>
+      <p class="detail-duration" id="detail-duration"></p>
+      <p class="detail-notes" id="detail-notes"></p>
 
-      <button id="play-btn">Démarrer</button>
+      <button id="play-btn" type="button">Démarrer cette fréquence</button>
+    </section>
+
+    <section id="now-playing" class="now-panel">
+      <div class="np-title" id="np-title">Aucune fréquence en cours</div>
+      <div class="np-info" id="np-info"></div>
+      <div class="np-timer" id="np-timer"></div>
     </section>
   </main>
 
