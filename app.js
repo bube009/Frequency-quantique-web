@@ -208,3 +208,4 @@ function stopFrequency() {
   document.getElementById("nowPlaying").innerText = "Aucune fréquence en cours";
   document.getElementById("stopContainer").style.display = "none";
 }
+document.getElementById("stopBtn").addEventListener("click", stopFrequency);
