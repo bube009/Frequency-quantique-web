@@ -199,14 +199,57 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.getElementById("play-btn").addEventListener("click", startSession);
 });
+function startFrequency(freq, item) {
+    // Crée le contexte audio s'il n'existe pas
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    // Arrête automatiquement l'ancien son
+    if (currentOscillator) {
+        try { currentOscillator.stop(); } catch (e) {}
+    }
+
+    // Nouveau signal
+    const osc = audioCtx.createOscillator();
+    osc.type = "sine";
+    osc.frequency.value = freq;
+
+    // Connexion
+    osc.connect(audioCtx.destination);
+    osc.start();
+
+    // Sauvegarde
+    currentOscillator = osc;
+    currentItem = item;
+    remainingSec = item.durationSec || 600;
+
+    // Affichage : fréquence en cours + bouton stop
+    document.getElementById("nowPlaying").innerHTML =
+        `${item.name} — ${freq} Hz`;
+
+    document.getElementById("stopContainer").style.display = "block";
 function stopFrequency() {
+  // Arrête le son s'il y en a un
   if (currentOscillator) {
-    try { currentOscillator.stop(); } catch(e) {}
+    try { currentOscillator.stop(); } catch (e) {}
     currentOscillator = null;
   }
 
-  // Mise à jour UI
-  document.getElementById("nowPlaying").innerText = "Aucune fréquence en cours";
-  document.getElementById("stopContainer").style.display = "none";
+  // Remet le texte en bas
+  const nowPlaying = document.getElementById("nowPlaying");
+  if (nowPlaying) {
+    nowPlaying.innerText = "Aucune fréquence en cours";
+  }
+
+  // Cache le bouton Stop
+  const stopContainer = document.getElementById("stopContainer");
+  if (stopContainer) {
+    stopContainer.style.display = "none";
+  }
 }
-document.getElementById("stopBtn").addEventListener("click", stopFrequency);
+
+const stopBtn = document.getElementById("stopBtn");
+if (stopBtn) {
+  stopBtn.addEventListener("click", stopFrequency);
+}
