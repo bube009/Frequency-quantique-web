@@ -68,14 +68,15 @@ function startSession() {
 }
 
 // Arrête proprement la fréquence en cours
-function stopFrequency(resetBg = true) {
+function stopFrequency() {
   if (currentOscillator) {
-    try {
-      currentOscillator.stop();
-    } catch (e) {}
-    currentOscillator.disconnect();
+    try { currentOscillator.stop(); } catch(e) {}
     currentOscillator = null;
   }
+
+  document.getElementById("nowPlaying").innerText = "Aucune fréquence en cours";
+  document.getElementById("stopContainer").style.display = "none";
+}
 
   if (timerInterval) {
     clearInterval(timerInterval);
