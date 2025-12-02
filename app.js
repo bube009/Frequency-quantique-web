@@ -230,26 +230,33 @@ function startFrequency(freq, item) {
 
     document.getElementById("stopContainer").style.display = "block";
 function stopFrequency() {
-  // Arrête le son s'il y en a un
-  if (currentOscillator) {
-    try { currentOscillator.stop(); } catch (e) {}
-    currentOscillator = null;
-  }
+    // Arrête le son existant
+    if (currentOscillator) {
+        try { currentOscillator.stop(); } catch (e) {}
+        currentOscillator = null;
+    }
 
-  // Remet le texte en bas
-  const nowPlaying = document.getElementById("nowPlaying");
-  if (nowPlaying) {
-    nowPlaying.innerText = "Aucune fréquence en cours";
-  }
+    // Reset du texte
+    const nowPlaying = document.getElementById("np-title");
+    if (nowPlaying) {
+        nowPlaying.innerText = "Aucune fréquence en cours";
+    }
 
-  // Cache le bouton Stop
-  const stopContainer = document.getElementById("stopContainer");
-  if (stopContainer) {
-    stopContainer.style.display = "none";
-  }
+    // Cache le bouton STOP
+    const stopContainer = document.getElementById("stopContainer");
+    if (stopContainer) {
+        stopContainer.style.display = "none";
+    }
+
+    // Efface le timer
+    const timer = document.getElementById("np-timer");
+    if (timer) {
+        timer.innerText = "";
+    }
 }
 
+// Activation du bouton STOP
 const stopBtn = document.getElementById("stopBtn");
 if (stopBtn) {
-  stopBtn.addEventListener("click", stopFrequency);
+    stopBtn.addEventListener("click", stopFrequency);
 }
