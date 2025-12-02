@@ -7,7 +7,7 @@ let currentOscillator = null;
 let audioCtx = null; 
 // Charge les données depuis frequencies.json
 async function loadData() {
-  const res = await fetch("frequencies.json");
+const res = await fetch("./frequencies.json");
   return await res.json();
 }
 
