@@ -1,257 +1,47 @@
 [
   {
-    "id": "org_foie",
-    "name": "Foie",
+    "id": "org_foie_detox",
+    "name": "Foie - Détox",
     "category": "Organe",
-    "group": "Organes",
-    "frequencyHz": 832,
-    "durationSec": 600,
-    "notes": "Centre de la détoxication, métaux lourds, médicaments, polluants."
+    "keywords": ["foie", "detox", "détox", "foie détox"],
+    "frequency_hz": 432.0,
+    "duration_minutes": 10,
+    "description": "Soutien vibratoire général pour la détox du foie (exemple de test)."
   },
   {
-    "id": "org_pancreas",
-    "name": "Pancréas",
+    "id": "org_coeur_harmonie",
+    "name": "Cœur - Harmonie",
     "category": "Organe",
-    "group": "Organes",
-    "frequencyHz": 3724,
-    "durationSec": 600,
-    "notes": "Régulation du glucose, de l’insuline et des enzymes digestives."
+    "keywords": ["coeur", "cœur", "cardiaque", "amour"],
+    "frequency_hz": 528.0,
+    "duration_minutes": 12,
+    "description": "Fréquence de test pour l’harmonie du cœur."
   },
   {
-    "id": "org_hypothalamus",
-    "name": "Hypothalamus",
-    "category": "Organe",
-    "group": "Organes",
-    "frequencyHz": 999,
-    "durationSec": 600,
-    "notes": "Chef d’orchestre hormonal, température, appétit, libido."
+    "id": "mal_stress_general",
+    "name": "Stress - Général",
+    "category": "Maladie",
+    "keywords": ["stress", "anxiété", "angoisse"],
+    "frequency_hz": 396.0,
+    "duration_minutes": 15,
+    "description": "Exemple de fréquence pour le stress général."
   },
   {
-    "id": "org_thymus",
-    "name": "Thymus",
-    "category": "Organe",
-    "group": "Organes",
-    "frequencyHz": 2442,
-    "durationSec": 600,
-    "notes": "Glande de l’immunité vibratoire, pathologies auto-immunes, fatigue post-virale."
+    "id": "mal_depression_legere",
+    "name": "Dépression légère",
+    "category": "Maladie",
+    "keywords": ["dépression", "tristesse", "moral"],
+    "frequency_hz": 639.0,
+    "duration_minutes": 20,
+    "description": "Exemple pour soutenir l’humeur (test)."
   },
   {
-    "id": "org_oeil",
-    "name": "Globe oculaire",
-    "category": "Organe",
-    "group": "Organes",
-    "frequencyHz": 1472,
-    "durationSec": 600,
-    "notes": "Glaucome, dégénérescence maculaire, fatigue visuelle."
-  },
-
-  {
-    "id": "neuro_dopamine",
-    "name": "Dopamine",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 5777,
-    "durationSec": 600,
-    "notes": "Voie dopaminergique, motivation, sortie de la dépression vibratoire."
-  },
-  {
-    "id": "neuro_serotonine",
-    "name": "Sérotonine",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 5588,
-    "durationSec": 600,
-    "notes": "Stabilisation de l’humeur, anxiété, troubles émotionnels."
-  },
-  {
-    "id": "neuro_gaba",
-    "name": "GABA",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 4444,
-    "durationSec": 600,
-    "notes": "Inhibiteur majeur, apaisement nerveux, anxiété, insomnie."
-  },
-  {
-    "id": "neuro_melatonine",
-    "name": "Mélatonine",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 4444,
-    "durationSec": 600,
-    "notes": "Sommeil profond, rééquilibrage de la glande pinéale."
-  },
-  {
-    "id": "neuro_acetylcholine",
-    "name": "Acétylcholine",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 5888,
-    "durationSec": 600,
-    "notes": "Mémoire, motricité fine, concentration."
-  },
-  {
-    "id": "neuro_noradrenaline",
-    "name": "Noradrénaline",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 5632,
-    "durationSec": 600,
-    "notes": "Énergie, réactivité, tonus du système nerveux sympathique."
-  },
-  {
-    "id": "neuro_histamine",
-    "name": "Histamine",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 3492,
-    "durationSec": 600,
-    "notes": "Modulation des réponses allergiques et inflammatoires (vision vibratoire)."
-  },
-
-  {
-    "id": "min_calcium",
-    "name": "Calcium",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 3024,
-    "durationSec": 600,
-    "notes": "Minéral principal de l’os, conduction nerveuse, spasmes."
-  },
-  {
-    "id": "min_magnesium",
-    "name": "Magnésium",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 1872,
-    "durationSec": 600,
-    "notes": "Anti-stress, sommeil, fatigue chronique, plus de 300 réactions enzymatiques."
-  },
-  {
-    "id": "min_zinc",
-    "name": "Zinc",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 5472,
-    "durationSec": 600,
-    "notes": "Catalyseur immunitaire, cicatrisation, enzymes digestives."
-  },
-  {
-    "id": "min_fer",
-    "name": "Fer",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 756,
-    "durationSec": 600,
-    "notes": "Transport de l’oxygène, anémie, manque de vitalité."
-  },
-  {
-    "id": "min_iode",
-    "name": "Iode",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 1976,
-    "durationSec": 600,
-    "notes": "Thyroïde, métabolisme, vitesse des fonctions neurologiques."
-  },
-  {
-    "id": "min_selenium",
-    "name": "Sélénium",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 6048,
-    "durationSec": 600,
-    "notes": "Antioxydant profond, cofacteur du glutathion."
-  },
-  {
-    "id": "min_bore",
-    "name": "Bore",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 6912,
-    "durationSec": 600,
-    "notes": "Rétention du calcium, soutien hormonal et osseux."
-  },
-  {
-    "id": "min_strontium",
-    "name": "Strontium",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 9216,
-    "durationSec": 600,
-    "notes": "Densité minérale osseuse, ostéoporose."
-  },
-
-  {
-    "id": "elt_hydrogene",
-    "name": "Hydrogène",
-    "category": "Élément",
-    "group": "Éléments chimiques",
-    "frequencyHz": 432,
-    "durationSec": 600,
-    "notes": "Équilibre acido-basique, réactions de l’ATP, harmonisation globale."
-  },
-  {
-    "id": "elt_helium",
-    "name": "Hélium",
-    "category": "Élément",
-    "group": "Éléments chimiques",
-    "frequencyHz": 872,
-    "durationSec": 600,
-    "notes": "Apaisement, impression de flottement, soutien des protocoles anti-anxiété."
-  },
-  {
-    "id": "elt_carbone",
-    "name": "Carbone",
-    "category": "Élément",
-    "group": "Éléments chimiques",
-    "frequencyHz": 836,
-    "durationSec": 600,
-    "notes": "Base de toutes les molécules organiques, régénération cellulaire profonde."
-  },
-  {
-    "id": "elt_oxygene",
-    "name": "Oxygène",
-    "category": "Élément",
-    "group": "Éléments chimiques",
-    "frequencyHz": 1264,
-    "durationSec": 600,
-    "notes": "Respiration cellulaire, fatigue, concentration."
-  },
-  {
-    "id": "elt_azote",
-    "name": "Azote",
-    "category": "Élément",
-    "group": "Éléments chimiques",
-    "frequencyHz": 2562,
-    "durationSec": 600,
-    "notes": "Synthèse des protéines et des neurotransmetteurs."
-  },
-  {
-    "id": "elt_fluor",
-    "name": "Fluor",
-    "category": "Élément",
-    "group": "Éléments chimiques",
-    "frequencyHz": 1363,
-    "durationSec": 600,
-    "notes": "Tissus durs, émail, support osseux."
-  },
-  {
-    "id": "elt_sodium",
-    "name": "Sodium",
-    "category": "Élément",
-    "group": "Éléments chimiques",
-    "frequencyHz": 1728,
-    "durationSec": 600,
-    "notes": "Équilibre osmotique, tension artérielle."
-  },
-  {
-    "id": "elt_potassium",
-    "name": "Potassium",
-    "category": "Élément",
-    "group": "Éléments chimiques",
-    "frequencyHz": 3744,
-    "durationSec": 600,
-    "notes": "Rythme cardiaque, flux électrolytiques et équilibre hydrique."
+    "id": "mal_douleur_chronique",
+    "name": "Douleur chronique",
+    "category": "Maladie",
+    "keywords": ["douleur", "inflammation", "chronique"],
+    "frequency_hz": 285.0,
+    "duration_minutes": 18,
+    "description": "Fréquence de test pour les douleurs chroniques."
   }
 ]
