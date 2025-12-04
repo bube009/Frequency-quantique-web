@@ -1,106 +1,55 @@
-// app.js – Version propre
-
-let allFrequencies = [];
-let currentOsc = null;
-let currentCardId = null;
+// toutes les fréquences chargées depuis le JSON
+let allFrequencies = []; // ou le nom que tu utilises déjà
 let audioCtx = null;
+let currentOsc = null;
 
-// Sélecteurs de base
-const listEl = document.getElementById("frequencyList");
-const searchEl = document.getElementById("searchInput");
-const categoryEl = document.getElementById("categoryFilter");
-const statusEl = document.getElementById("status");
+function startTone(freqHz) {
+  // on arrête la précédente
+  stopTone();
 
-// ----------- Chargement du JSON ----------- //
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
 
-async function loadFrequencies() {
-  try {
-    statusEl.textContent = "Chargement des fréquences...";
-    const res = await fetch("frequencies.json", { cache: "no-store" });
+  const osc = audioCtx.createOscillator();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(freqHz, audioCtx.currentTime);
+  osc.connect(audioCtx.destination);
+  osc.start();
 
-    if (!res.ok) {
-      throw new Error("Impossible de charger frequencies.json");
-    }
+  currentOsc = osc;
+}
 
-    const data = await res.json();
-
-    if (!Array.isArray(data)) {
-      throw new Error("Le JSON doit être un tableau [] d'objets.");
-    }
-
-    allFrequencies = data;
-    statusEl.textContent = `Fréquences chargées : ${allFrequencies.length}`;
-    renderList();
-  } catch (err) {
-    console.error(err);
-    statusEl.textContent = "Erreur: " + err.message;
-    listEl.innerHTML = "";
+function stopTone() {
+  if (currentOsc) {
+    try {
+      currentOsc.stop();
+    } catch (e) {}
+    currentOsc.disconnect();
+    currentOsc = null;
   }
 }
 
-// ----------- Rendu de la liste ----------- //
+// gestion globale des clics sur les boutons
+document.addEventListener("click", (e) => {
+  const startBtn = e.target.closest(".btn-start");
+  const stopBtn  = e.target.closest(".btn-stop");
 
-function renderList() {
-  const q = (searchEl.value || "").toLowerCase().trim();
-  const cat = categoryEl.value;
+  if (startBtn) {
+    const id = startBtn.dataset.id;
 
-  const filtered = allFrequencies.filter((item) => {
-    if (cat !== "all" && item.category !== cat) return false;
+    // 🔥 on cherche la bonne entrée dans le JSON
+    const item = allFrequencies.find((f) => f.id === id);
+    if (!item) return;
 
-    if (!q) return true;
-
-    const haystack = [
-      item.name,
-      item.category,
-      ...(item.keywords || []),
-      item.description || "",
-    ]
-      .join(" ")
-      .toLowerCase();
-
-    return haystack.includes(q);
-  });
-
-  if (filtered.length === 0) {
-    listEl.innerHTML =
-      '<p style="opacity:0.8;font-size:0.85rem;">Aucun résultat pour ces critères…</p>';
-    return;
+    // et on joue SA fréquence
+    startTone(item.frequency);
   }
 
-  listEl.innerHTML = filtered
-    .map(
-      (item) => `
-      <article class="card ${item.id === currentCardId ? "playing" : ""}" data-id="${
-        item.id
-      }">
-        <div class="card-header">
-          <h2 class="card-title">${escapeHtml(item.name)}</h2>
-          <span class="card-category">${escapeHtml(item.category || "Autre")}</span>
-        </div>
-        <div class="card-meta">
-  <span>${item.frequency} Hz</span>
-  ${
-    item.duration
-      ? `<span>${item.duration} 
-      : ""
+  if (stopBtn) {
+    stopTone();
   }
-</div>
-        ${
-          item.description
-            ? `<p class="card-description">${escapeHtml(item.description)}</p>`
-            : ""
-        }
-        <div class="card-actions">
-          <button class="btn btn-start" data-id="${
-            item.id
-          }">Démarrer</button>
-          <button class="btn secondary btn-stop" data-id="${
-            item.id
-          }">Arrêter</button>
-        </div>
-      </article>
-    `
-    )
+});
     .join("");
 }
 
