@@ -81,7 +81,7 @@ function renderList() {
   <span>${item.frequency} Hz</span>
   ${
     item.duration
-      ? `<span>${item.duration} min</span>`
+      ? `<span>${item.duration} 
       : ""
   }
 </div>
