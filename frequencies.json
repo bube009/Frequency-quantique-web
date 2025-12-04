@@ -1,139 +1,47 @@
 [
   {
-    "id": "org_foie",
-    "name": "Foie",
+    "id": "org_foie_detox",
+    "name": "Foie – Détox",
     "category": "Organe",
-    "group": "Organes",
-    "frequencyHz": 832,
-    "durationSec": 600,
-    "notes": "Détoxication, métaux lourds, harmonisation hépatique."
+    "keywords": ["foie", "detox", "détox", "foie détox"],
+    "frequency_hz": 432,
+    "duration_minutes": 10,
+    "description": "Soutien vibratoire général pour la détox du foie (exemple de test)."
   },
   {
-    "id": "org_pancreas",
-    "name": "Pancréas",
+    "id": "org_coeur_harmonie",
+    "name": "Cœur – Harmonie",
     "category": "Organe",
-    "group": "Organes",
-    "frequencyHz": 3724,
-    "durationSec": 600,
-    "notes": "Régulation glycémique, soutien enzymatique."
+    "keywords": ["coeur", "cœur", "cardiaque", "amour"],
+    "frequency_hz": 528,
+    "duration_minutes": 12,
+    "description": "Fréquence de test pour l’harmonie du cœur."
   },
   {
-    "id": "org_hypothalamus",
-    "name": "Hypothalamus",
-    "category": "Organe",
-    "group": "Organes",
-    "frequencyHz": 999,
-    "durationSec": 600,
-    "notes": "Chef d’orchestre hormonal, thermorégulation, libido."
+    "id": "mal_stress_general",
+    "name": "Stress – Général",
+    "category": "Maladie",
+    "keywords": ["stress", "anxiété", "angoisse"],
+    "frequency_hz": 396,
+    "duration_minutes": 15,
+    "description": "Exemple de fréquence pour le stress général."
   },
   {
-    "id": "org_thymus",
-    "name": "Thymus",
-    "category": "Organe",
-    "group": "Organes",
-    "frequencyHz": 2442,
-    "durationSec": 600,
-    "notes": "Système immunitaire, vitalité, modulation immunitaire."
+    "id": "mal_depression_legere",
+    "name": "Dépression légère",
+    "category": "Maladie",
+    "keywords": ["dépression", "tristesse", "moral"],
+    "frequency_hz": 639,
+    "duration_minutes": 20,
+    "description": "Exemple pour soutenir l’humeur (test)."
   },
   {
-    "id": "org_oeil",
-    "name": "Globe oculaire",
-    "category": "Organe",
-    "group": "Organes",
-    "frequencyHz": 1472,
-    "durationSec": 600,
-    "notes": "Vision, glaucome, fatigue visuelle."
-  },
-
-  {
-    "id": "neuro_dopamine",
-    "name": "Dopamine",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 852,
-    "durationSec": 600,
-    "notes": "Motivation, plaisir, réduction de la fatigue mentale."
-  },
-  {
-    "id": "neuro_serotonine",
-    "name": "Sérotonine",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 741,
-    "durationSec": 600,
-    "notes": "Humeur, anxiété, stabilisation émotionnelle."
-  },
-  {
-    "id": "neuro_gaba",
-    "name": "GABA",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 432,
-    "durationSec": 600,
-    "notes": "Relaxation profonde, anxiolytique naturel."
-  },
-  {
-    "id": "neuro_melatonine",
-    "name": "Mélatonine",
-    "category": "Neurotransmetteur",
-    "group": "Neurotransmetteurs",
-    "frequencyHz": 963,
-    "durationSec": 600,
-    "notes": "Sommeil profond, synchronisation circadienne."
-  },
-
-  {
-    "id": "min_calcium",
-    "name": "Calcium",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 0,
-    "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence de ton grimoire (os, dents, transmission nerveuse)."
-  },
-  {
-    "id": "min_magnesium",
-    "name": "Magnésium",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 0,
-    "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence (relaxation musculaire, stress, sommeil)."
-  },
-  {
-    "id": "min_zinc",
-    "name": "Zinc",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 0,
-    "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence (immunité, cicatrisation, hormones)."
-  },
-  {
-    "id": "min_fer",
-    "name": "Fer",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 0,
-    "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence (hémoglobine, oxygénation)."
-  },
-  {
-    "id": "min_iode",
-    "name": "Iode",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 0,
-    "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence (thyroïde, métabolisme)."
-  },
-  {
-    "id": "min_selenium",
-    "name": "Sélénium",
-    "category": "Minéral",
-    "group": "Minéraux",
-    "frequencyHz": 0,
-    "durationSec": 600,
-    "notes": "À remplir avec la vraie fréquence (antioxydant, protection cellulaire)."
+    "id": "mal_douleur_chronique",
+    "name": "Douleur chronique",
+    "category": "Maladie",
+    "keywords": ["douleur", "inflammation", "chronique"],
+    "frequency_hz": 285,
+    "duration_minutes": 18,
+    "description": "Fréquence de test pour les douleurs chroniques."
   }
 ]
