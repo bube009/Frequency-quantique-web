@@ -1,28 +1,28 @@
 [
   {
     "id": "org_foie_detox",
-    "name": "Foie - Détox",
+    "name": "Foie – Détox",
     "category": "Organe",
     "keywords": ["foie", "detox", "détox", "foie détox"],
-    "frequency_hz": 432.0,
+    "frequency_hz": 432,
     "duration_minutes": 10,
     "description": "Soutien vibratoire général pour la détox du foie (exemple de test)."
   },
   {
     "id": "org_coeur_harmonie",
-    "name": "Cœur - Harmonie",
+    "name": "Cœur – Harmonie",
     "category": "Organe",
     "keywords": ["coeur", "cœur", "cardiaque", "amour"],
-    "frequency_hz": 528.0,
+    "frequency_hz": 528,
     "duration_minutes": 12,
     "description": "Fréquence de test pour l’harmonie du cœur."
   },
   {
     "id": "mal_stress_general",
-    "name": "Stress - Général",
+    "name": "Stress – Général",
     "category": "Maladie",
     "keywords": ["stress", "anxiété", "angoisse"],
-    "frequency_hz": 396.0,
+    "frequency_hz": 396,
     "duration_minutes": 15,
     "description": "Exemple de fréquence pour le stress général."
   },
@@ -31,7 +31,7 @@
     "name": "Dépression légère",
     "category": "Maladie",
     "keywords": ["dépression", "tristesse", "moral"],
-    "frequency_hz": 639.0,
+    "frequency_hz": 639,
     "duration_minutes": 20,
     "description": "Exemple pour soutenir l’humeur (test)."
   },
@@ -40,7 +40,7 @@
     "name": "Douleur chronique",
     "category": "Maladie",
     "keywords": ["douleur", "inflammation", "chronique"],
-    "frequency_hz": 285.0,
+    "frequency_hz": 285,
     "duration_minutes": 18,
     "description": "Fréquence de test pour les douleurs chroniques."
   }
