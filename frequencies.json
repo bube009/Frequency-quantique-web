@@ -1,47 +1,182 @@
 [
   {
-    "id": "org_foie_detox",
-    "name": "Foie – Détox",
-    "category": "Organe",
-    "keywords": ["foie", "detox", "détox", "foie détox"],
-    "frequency_hz": 432,
-    "duration_minutes": 10,
-    "description": "Soutien vibratoire général pour la détox du foie (exemple de test)."
-  },
-  {
-    "id": "org_coeur_harmonie",
-    "name": "Cœur – Harmonie",
-    "category": "Organe",
-    "keywords": ["coeur", "cœur", "cardiaque", "amour"],
-    "frequency_hz": 528,
-    "duration_minutes": 12,
-    "description": "Fréquence de test pour l’harmonie du cœur."
-  },
-  {
     "id": "mal_stress_general",
     "name": "Stress – Général",
-    "category": "Maladie",
-    "keywords": ["stress", "anxiété", "angoisse"],
-    "frequency_hz": 396,
-    "duration_minutes": 15,
-    "description": "Exemple de fréquence pour le stress général."
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 396,
+    "duration": 15,
+    "description": "Exemple de signal pour le stress général (usage expérimental, sans valeur médicale)."
   },
   {
     "id": "mal_depression_legere",
     "name": "Dépression légère",
-    "category": "Maladie",
-    "keywords": ["dépression", "tristesse", "moral"],
-    "frequency_hz": 639,
-    "duration_minutes": 20,
-    "description": "Exemple pour soutenir l’humeur (test)."
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 639,
+    "duration": 20,
+    "description": "Signal test pour soutenir l’humeur (sans preuve médicale, expérimental)."
   },
   {
     "id": "mal_douleur_chronique",
     "name": "Douleur chronique",
-    "category": "Maladie",
-    "keywords": ["douleur", "inflammation", "chronique"],
-    "frequency_hz": 285,
-    "duration_minutes": 18,
-    "description": "Fréquence de test pour les douleurs chroniques."
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 285,
+    "duration": 18,
+    "description": "Signal de test pour les douleurs persistantes (usage expérimental uniquement)."
+  },
+  {
+    "id": "mal_migraine_aigue",
+    "name": "Migraine aiguë",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 528,
+    "duration": 15,
+    "description": "Exemple de fréquence pour expérimenter sur les migraines (non médical)."
+  },
+  {
+    "id": "mal_insomnie",
+    "name": "Insomnie",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 432,
+    "duration": 30,
+    "description": "Signal relaxant pour troubles du sommeil (test audio, sans valeur thérapeutique prouvée)."
+  },
+  {
+    "id": "mal_anxiete_intense",
+    "name": "Anxiété intense",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 417,
+    "duration": 20,
+    "description": "Fréquence expérimentale pour états anxieux (pas un traitement médical)."
+  },
+  {
+    "id": "mal_fatigue_extreme",
+    "name": "Fatigue extrême",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 444,
+    "duration": 25,
+    "description": "Signal de test pour fatigue prolongée (usage expérimental)."
+  },
+  {
+    "id": "mal_inflammation_chronique",
+    "name": "Inflammation chronique",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 272,
+    "duration": 22,
+    "description": "Exemple de fréquence pour expérimenter sur l’inflammation (non validé médicalement)."
+  },
+  {
+    "id": "mal_troubles_digestifs",
+    "name": "Troubles digestifs",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 380,
+    "duration": 18,
+    "description": "Signal audio de test pour inconfort digestif (sans valeur thérapeutique reconnue)."
+  },
+  {
+    "id": "mal_recuperation_post_op",
+    "name": "Récupération post-opératoire",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 555,
+    "duration": 25,
+    "description": "Exemple de fréquence de soutien après intervention (usage expérimental seulement)."
+  },
+  {
+    "id": "mal_hypertension",
+    "name": "Hypertension (soutien)",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 462,
+    "duration": 20,
+    "description": "Signal de soutien expérimental pour pression artérielle élevée (ne remplace pas un traitement)."
+  },
+  {
+    "id": "mal_diabete",
+    "name": "Diabète (équilibre général)",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 510,
+    "duration": 24,
+    "description": "Fréquence test pour l’équilibre métabolique (aucune preuve médicale)."
+  },
+  {
+    "id": "mal_douleurs_articulaires",
+    "name": "Douleurs articulaires",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 294,
+    "duration": 20,
+    "description": "Signal expérimental pour raideurs et douleurs articulaires."
+  },
+  {
+    "id": "mal_fibromyalgie",
+    "name": "Fibromyalgie (soutien)",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 333,
+    "duration": 28,
+    "description": "Exemple de fréquence pour douleurs diffuses (usage expérimental)."
+  },
+  {
+    "id": "mal_cancer_soutien",
+    "name": "Cancer (soutien énergétique)",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 600,
+    "duration": 30,
+    "description": "Signal de soutien énergétique symbolique, ne remplace jamais les traitements médicaux."
+  },
+  {
+    "id": "mal_troubles_immunitaires",
+    "name": "Troubles immunitaires",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 488,
+    "duration": 22,
+    "description": "Fréquence test pour harmoniser le terrain immunitaire (non médical)."
+  },
+  {
+    "id": "mal_allergies_saison",
+    "name": "Allergies saisonnières",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 372,
+    "duration": 18,
+    "description": "Signal expérimental pour inconfort lié aux allergies."
+  },
+  {
+    "id": "mal_troubles_respiratoires",
+    "name": "Troubles respiratoires",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 320,
+    "duration": 20,
+    "description": "Exemple de fréquence pour soutenir le confort respiratoire (sans valeur médicale prouvée)."
+  },
+  {
+    "id": "mal_addictions",
+    "name": "Addictions (accompagnement)",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 540,
+    "duration": 21,
+    "description": "Signal de soutien expérimental pour processus de libération d’habitudes."
+  },
+  {
+    "id": "mal_burnout",
+    "name": "Burn-out",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 470,
+    "duration": 26,
+    "description": "Fréquence test pour fatigue nerveuse et mentale (usage expérimental, non médical)."
   }
 ]
