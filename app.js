@@ -1,262 +1,216 @@
+// app.js – Version propre
+
+let allFrequencies = [];
+let currentOsc = null;
+let currentCardId = null;
 let audioCtx = null;
-let currentOscillator = null;
-let currentItem = null;
-let remainingSec = 0;
-let timerInterval = null;
-let currentOscillator = null;
-let audioCtx = null; 
-// Charge les données depuis frequencies.json
-async function loadData() {
-const res = await fetch("./frequencies.json");
-  return await res.json();
+
+// Sélecteurs de base
+const listEl = document.getElementById("frequencyList");
+const searchEl = document.getElementById("searchInput");
+const categoryEl = document.getElementById("categoryFilter");
+const statusEl = document.getElementById("status");
+
+// ----------- Chargement du JSON ----------- //
+
+async function loadFrequencies() {
+  try {
+    statusEl.textContent = "Chargement des fréquences...";
+    const res = await fetch("frequencies.json", { cache: "no-store" });
+
+    if (!res.ok) {
+      throw new Error("Impossible de charger frequencies.json");
+    }
+
+    const data = await res.json();
+
+    if (!Array.isArray(data)) {
+      throw new Error("Le JSON doit être un tableau [] d'objets.");
+    }
+
+    allFrequencies = data;
+    statusEl.textContent = `Fréquences chargées : ${allFrequencies.length}`;
+    renderList();
+  } catch (err) {
+    console.error(err);
+    statusEl.textContent = "Erreur: " + err.message;
+    listEl.innerHTML = "";
+  }
 }
 
-function renderList(data) {
-  const list = document.getElementById("list");
-  list.innerHTML = "";
+// ----------- Rendu de la liste ----------- //
 
-  data.forEach((item) => {
-    const li = document.createElement("li");
-    li.className = "freq-item";
+function renderList() {
+  const q = (searchEl.value || "").toLowerCase().trim();
+  const cat = categoryEl.value;
 
-    li.innerHTML = `
-      <div class="freq-main">
-        <div>
-          <div class="freq-name">${item.name}</div>
-          <div class="freq-meta">${item.category} — ${item.frequencyHz} Hz</div>
-        </div>
-        <button class="freq-btn" type="button">Voir</button>
-      </div>
-    `;
+  const filtered = allFrequencies.filter((item) => {
+    if (cat !== "all" && item.category !== cat) return false;
 
-    li.querySelector("button").addEventListener("click", () => showDetail(item));
-    list.appendChild(li);
+    if (!q) return true;
+
+    const haystack = [
+      item.name,
+      item.category,
+      ...(item.keywords || []),
+      item.description || "",
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    return haystack.includes(q);
   });
-}
 
-function showDetail(item) {
-  currentItem = item;
-
-  const detail = document.getElementById("detail");
-  const name = document.getElementById("detail-name");
-  const cat = document.getElementById("detail-category");
-  const freq = document.getElementById("detail-frequency");
-  const dur = document.getElementById("detail-duration");
-  const notes = document.getElementById("detail-notes");
-
-  name.textContent = item.name;
-  cat.textContent = item.category;
-  freq.textContent = `${item.frequencyHz} Hz`;
-
-  if (item.durationSec && item.durationSec > 0) {
-    const min = Math.round(item.durationSec / 60);
-    dur.textContent = `Durée recommandée : ${min} min`;
-  } else {
-    dur.textContent = `Durée libre (pas de minuterie).`;
-  }
-
-  notes.textContent = item.notes || "";
-
-  detail.classList.remove("hidden");
-  updateNowPlaying(); // rafraîchit le panneau du bas
-}
-
-// Démarre la fréquence de l'item courant
-function startSession() {
-  if (!currentItem) return;
-  startFrequency(currentItem);
-}
-
-// Arrête proprement la fréquence en cours
-function stopFrequency() {
-  if (currentOscillator) {
-    try { currentOscillator.stop(); } catch(e) {}
-    currentOscillator = null;
-  }
-
-  document.getElementById("nowPlaying").innerText = "Aucune fréquence en cours";
-  document.getElementById("stopContainer").style.display = "none";
-}
-
-  if (timerInterval) {
-    clearInterval(timerInterval);
-    timerInterval = null;
-  }
-
-  if (resetBg) {
-    document.body.classList.remove("angel-mode");
-  }
-
-  remainingSec = 0;
-  updateNowPlaying();
-}
-
-// Lance une nouvelle fréquence et arrête automatiquement l’ancienne
-function startFrequency(item) {
-  // Arrêt automatique de tout ce qui joue déjà
-  stopFrequency(false);
-
-  // Pas de fréquence définie → on affiche juste un message
-  if (!item.frequencyHz || item.frequencyHz <= 0) {
-    updateNowPlaying(
-      `Aucune fréquence définie pour "${item.name}" — complète-la dans ton grimoire.`
-    );
+  if (filtered.length === 0) {
+    listEl.innerHTML =
+      '<p style="opacity:0.8;font-size:0.85rem;">Aucun résultat pour ces critères…</p>';
     return;
   }
 
-  if (!audioCtx) {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    audioCtx = new AC();
-  }
+  listEl.innerHTML = filtered
+    .map(
+      (item) => `
+      <article class="card ${item.id === currentCardId ? "playing" : ""}" data-id="${
+        item.id
+      }">
+        <div class="card-header">
+          <h2 class="card-title">${escapeHtml(item.name)}</h2>
+          <span class="card-category">${escapeHtml(item.category || "Autre")}</span>
+        </div>
+        <div class="card-meta">
+          <span>${item.frequency_hz} Hz</span>
+          ${
+            item.duration_minutes
+              ? `<span>${item.duration_minutes} min</span>`
+              : ""
+          }
+        </div>
+        ${
+          item.description
+            ? `<p class="card-description">${escapeHtml(item.description)}</p>`
+            : ""
+        }
+        <div class="card-actions">
+          <button class="btn btn-start" data-id="${
+            item.id
+          }">Démarrer</button>
+          <button class="btn secondary btn-stop" data-id="${
+            item.id
+          }">Arrêter</button>
+        </div>
+      </article>
+    `
+    )
+    .join("");
+}
 
-  const osc = audioCtx.createOscillator();
+// ----------- Audio (Web Audio API simple) ----------- //
+
+function ensureAudioContext() {
+  if (!audioCtx) {
+    const Ctor = window.AudioContext || window.webkitAudioContext;
+    if (!Ctor) {
+      alert("Web Audio non supporté sur ce navigateur.");
+      return null;
+    }
+    audioCtx = new Ctor();
+  }
+  return audioCtx;
+}
+
+function startFrequency(item) {
+  const ctx = ensureAudioContext();
+  if (!ctx) return;
+
+  stopCurrent(); // stop si un autre joue
+
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
   osc.type = "sine";
-  osc.frequency.value = item.frequencyHz;
-  osc.connect(audioCtx.destination);
+  osc.frequency.value = item.frequency_hz || 440;
+
+  // volume modéré
+  gain.gain.value = 0.15;
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
   osc.start();
 
-  currentOscillator = osc;
-  currentItem = item;
-
-  // Mode "ange" = fond spécial
-  if (item.category === "Ange guérisseur") {
-    document.body.classList.add("angel-mode");
-  } else {
-    document.body.classList.remove("angel-mode");
-  }
-
-  // Minuterie
-  remainingSec = item.durationSec && item.durationSec > 0 ? item.durationSec : 0;
-
-  if (timerInterval) clearInterval(timerInterval);
-
-  if (remainingSec > 0) {
-    timerInterval = setInterval(() => {
-      remainingSec--;
-      if (remainingSec <= 0) {
-        stopFrequency();
-      } else {
-        updateNowPlaying();
-      }
-    }, 1000);
-  }
-
-  updateNowPlaying();
+  currentOsc = osc;
+  currentCardId = item.id;
+  highlightCurrentCard();
 }
 
-// Met à jour le panneau de lecture en bas
-function updateNowPlaying(message) {
-  const panel = document.getElementById("now-playing");
-  const title = document.getElementById("np-title");
-  const info = document.getElementById("np-info");
-  const timer = document.getElementById("np-timer");
-
-  if (message) {
-    title.textContent = message;
-    info.textContent = "";
-    timer.textContent = "";
-    return;
-  }
-
-  if (!currentItem || !currentOscillator) {
-    title.textContent = "Aucune fréquence en cours";
-    info.textContent = "";
-    timer.textContent = "";
-    return;
-  }
-
-  title.textContent = `${currentItem.name} — ${currentItem.frequencyHz} Hz`;
-  info.textContent = `${currentItem.category}${
-    currentItem.group ? " • " + currentItem.group : ""
-  }`;
-
-  if (remainingSec > 0) {
-    const min = Math.floor(remainingSec / 60);
-    const sec = remainingSec % 60;
-    timer.textContent = `Temps restant : ${min} min ${String(sec).padStart(2, "0")} s`;
-  } else {
-    timer.textContent = "Mode libre (aucune minuterie).";
+function stopCurrent() {
+  if (currentOsc) {
+    try {
+      currentOsc.stop();
+    } catch (e) {
+      console.warn("Osc déjà stoppé:", e);
+    }
+    currentOsc.disconnect();
+    currentOsc = null;
+    currentCardId = null;
+    highlightCurrentCard();
   }
 }
 
-// Initialisation
-document.addEventListener("DOMContentLoaded", async () => {
-  const data = await loadData();
-  renderList(data);
+function highlightCurrentCard() {
+  document
+    .querySelectorAll(".card")
+    .forEach((el) => el.classList.remove("playing"));
 
-  const search = document.getElementById("search");
-  search.addEventListener("input", (e) => {
-    const q = e.target.value.toLowerCase().trim();
-    const filtered = data.filter((item) => {
-      return (
-        item.name.toLowerCase().includes(q) ||
-        (item.category && item.category.toLowerCase().includes(q)) ||
-        (item.group && item.group.toLowerCase().includes(q))
-      );
-    });
-    renderList(filtered);
-  });
+  if (!currentCardId) return;
 
-  document.getElementById("play-btn").addEventListener("click", startSession);
+  const el = document.querySelector(`.card[data-id="${currentCardId}"]`);
+  if (el) el.classList.add("playing");
+}
+
+// ----------- Utilitaire ----------- //
+
+function escapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// ----------- Événements UI ----------- //
+
+// Recherche & filtre
+searchEl.addEventListener("input", () => {
+  renderList();
 });
-function startFrequency(freq, item) {
-    // Crée le contexte audio s'il n'existe pas
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+categoryEl.addEventListener("change", () => {
+  renderList();
+});
+
+// Délégation des clics Start/Stop
+listEl.addEventListener("click", (event) => {
+  const startBtn = event.target.closest(".btn-start");
+  const stopBtn = event.target.closest(".btn-stop");
+
+  if (startBtn) {
+    const id = startBtn.dataset.id;
+    const item = allFrequencies.find((f) => f.id === id);
+    if (item) {
+      startFrequency(item);
     }
-
-    // Arrête automatiquement l'ancien son
-    if (currentOscillator) {
-        try { currentOscillator.stop(); } catch (e) {}
+  } else if (stopBtn) {
+    const id = stopBtn.dataset.id;
+    if (id === currentCardId) {
+      // on arrête seulement si c'est la fréquence en cours
+      stopCurrent();
     }
+  }
+});
 
-    // Nouveau signal
-    const osc = audioCtx.createOscillator();
-    osc.type = "sine";
-    osc.frequency.value = freq;
+// ----------- Init ----------- //
 
-    // Connexion
-    osc.connect(audioCtx.destination);
-    osc.start();
-
-    // Sauvegarde
-    currentOscillator = osc;
-    currentItem = item;
-    remainingSec = item.durationSec || 600;
-
-    // Affichage : fréquence en cours + bouton stop
-    document.getElementById("nowPlaying").innerHTML =
-        `${item.name} — ${freq} Hz`;
-
-    document.getElementById("stopContainer").style.display = "block";
-function stopFrequency() {
-    // Arrête le son existant
-    if (currentOscillator) {
-        try { currentOscillator.stop(); } catch (e) {}
-        currentOscillator = null;
-    }
-
-    // Reset du texte
-    const nowPlaying = document.getElementById("np-title");
-    if (nowPlaying) {
-        nowPlaying.innerText = "Aucune fréquence en cours";
-    }
-
-    // Cache le bouton STOP
-    const stopContainer = document.getElementById("stopContainer");
-    if (stopContainer) {
-        stopContainer.style.display = "none";
-    }
-
-    // Efface le timer
-    const timer = document.getElementById("np-timer");
-    if (timer) {
-        timer.innerText = "";
-    }
-}
-
-// Activation du bouton STOP
-const stopBtn = document.getElementById("stopBtn");
-if (stopBtn) {
-    stopBtn.addEventListener("click", stopFrequency);
-}
+loadFrequencies();
