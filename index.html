@@ -2,45 +2,51 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Frequency Quantique</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Frequency Quantique</h1>
-  </header>
-
-  <main>
-    <input id="search" type="search" placeholder="Rechercher une fréquence..." />
-
-    <ul id="list"></ul>
-
-    <section id="detail" class="hidden">
-      <h2 id="detail-name"></h2>
-      <p class="detail-line">
-        <span id="detail-category"></span> —
-        <span id="detail-frequency"></span>
+  <div class="app">
+    <header class="header">
+      <h1>Frequency Quantique</h1>
+      <p class="subtitle">
+        Sélectionne une fréquence, démarre / arrête, et utilise la recherche pour filtrer.
       </p>
-      <p class="detail-duration" id="detail-duration"></p>
-      <p class="detail-notes" id="detail-notes"></p>
+    </header>
 
-      <button id="play-btn" type="button">Démarrer cette fréquence</button>
+    <section class="toolbar">
+      <div class="field">
+        <label for="searchInput">Recherche</label>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Nom, organe, maladie..."
+        />
+      </div>
+
+      <div class="field">
+        <label for="categoryFilter">Catégorie</label>
+        <select id="categoryFilter">
+          <option value="all">Toutes</option>
+          <option value="Organe">Organes</option>
+          <option value="Maladie">Maladies</option>
+          <option value="Autre">Autre</option>
+        </select>
+      </div>
     </section>
 
-    <section id="now-playing" class="now-panel">
-      <div class="np-title" id="np-title">Aucune fréquence en cours</div>
-      <div id="stopContainer" style="display:none; margin-top:20px; text-align:center;">
-  <button id="stopBtn" class="btn-stop">Arrêter</button>
-</div>
-      <div class="np-info" id="np-info"></div>
-      <div class="np-timer" id="np-timer"></div>
-    </section>
-  </main>
+    <main>
+      <div id="status" class="status"></div>
+      <div id="frequencyList" class="frequency-list">
+        <!-- Les cartes de fréquences seront injectées ici par app.js -->
+      </div>
+    </main>
 
-  <footer>
-    <p>Version web simple — sans installation nécessaire.</p>
-  </footer>
+    <footer class="footer">
+      <span>v1 – build propre pour tests (JSON léger)</span>
+    </footer>
+  </div>
 
   <script src="app.js"></script>
 </body>
