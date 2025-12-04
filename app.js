@@ -163,3 +163,22 @@ listEl.addEventListener("click", (event) => {
 // ----------- Init ----------- //
 
 loadFrequencies();
+document.addEventListener("click", (e) => {
+  const startBtn = e.target.closest(".btn-start");
+  const stopBtn  = e.target.closest(".btn-stop");
+
+  if (startBtn) {
+    const id = startBtn.dataset.id;
+
+    // on cherche la bonne entrée dans toutes les fréquences
+    const item = allFrequencies.find((f) => f.id === id);
+    if (!item) return;
+
+    // et on joue SA fréquence
+    startTone(item.frequency);
+  }
+
+  if (stopBtn) {
+    stopTone();
+  }
+});
