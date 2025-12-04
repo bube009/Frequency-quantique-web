@@ -88,5 +88,95 @@
     "frequency": 555,
     "duration": 25,
     "description": "Exemple de fréquence de soutien après intervention (usage expérimental seulement)."
+  },
+  {
+    "id": "mal_hypertension",
+    "name": "Hypertension (soutien)",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 462,
+    "duration": 20,
+    "description": "Signal de soutien expérimental pour pression artérielle élevée (ne remplace pas un traitement)."
+  },
+  {
+    "id": "mal_diabete",
+    "name": "Diabète (équilibre général)",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 510,
+    "duration": 24,
+    "description": "Fréquence test pour l’équilibre métabolique (aucune preuve médicale)."
+  },
+  {
+    "id": "mal_douleurs_articulaires",
+    "name": "Douleurs articulaires",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 294,
+    "duration": 20,
+    "description": "Signal expérimental pour raideurs et douleurs articulaires."
+  },
+  {
+    "id": "mal_fibromyalgie",
+    "name": "Fibromyalgie (soutien)",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 333,
+    "duration": 28,
+    "description": "Exemple de fréquence pour douleurs diffuses (usage expérimental)."
+  },
+  {
+    "id": "mal_cancer_soutien",
+    "name": "Cancer (soutien énergétique)",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 600,
+    "duration": 30,
+    "description": "Signal de soutien énergétique symbolique, ne remplace jamais les traitements médicaux."
+  },
+  {
+    "id": "mal_troubles_immunitaires",
+    "name": "Troubles immunitaires",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 488,
+    "duration": 22,
+    "description": "Fréquence test pour harmoniser le terrain immunitaire (non médical)."
+  },
+  {
+    "id": "mal_allergies_saison",
+    "name": "Allergies saisonnières",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 372,
+    "duration": 18,
+    "description": "Signal expérimental pour inconfort lié aux allergies."
+  },
+  {
+    "id": "mal_troubles_respiratoires",
+    "name": "Troubles respiratoires",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 320,
+    "duration": 20,
+    "description": "Exemple de fréquence pour soutenir le confort respiratoire (sans valeur médicale prouvée)."
+  },
+  {
+    "id": "mal_addictions",
+    "name": "Addictions (accompagnement)",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 540,
+    "duration": 21,
+    "description": "Signal de soutien expérimental pour processus de libération d’habitudes."
+  },
+  {
+    "id": "mal_burnout",
+    "name": "Burn-out",
+    "category": "Maladies",
+    "type": "MALADIE",
+    "frequency": 470,
+    "duration": 26,
+    "description": "Fréquence test pour fatigue nerveuse et mentale (usage expérimental, non médical)."
   }
 ]
