@@ -78,13 +78,13 @@ function renderList() {
           <span class="card-category">${escapeHtml(item.category || "Autre")}</span>
         </div>
         <div class="card-meta">
-          <span>${{item.frequency}}Hz</span>
-          ${
-            item.duration_minutes
-              ? `<span>${{item.duration_minutes}}min</span>`
-              : ""
-          }
-        </div>
+  <span>${item.frequency} Hz</span>
+  ${
+    item.duration
+      ? `<span>${item.duration} min</span>`
+      : ""
+  }
+</div>
         ${
           item.description
             ? `<p class="card-description">${escapeHtml(item.description)}</p>`
