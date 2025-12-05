@@ -2,52 +2,54 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Frequency Quantique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app">
-    <header class="header">
-      <h1>Frequency Quantique</h1>
-      <p class="subtitle">
-        Sélectionne une fréquence, démarre / arrête, et utilise la recherche pour filtrer.
-      </p>
-    </header>
+  <header class="app-header">
+    <h1>FREQUENCY<br />QUANTIQUE</h1>
+    <p class="subtitle">
+      Sélectionne une fréquence, démarre / arrête, et utilise la recherche pour filtrer.
+    </p>
+  </header>
 
-    <section class="toolbar">
+  <main class="app-main">
+    <section class="controls">
       <div class="field">
-        <label for="searchInput">Recherche</label>
+        <label for="search">Recherche</label>
         <input
-          id="searchInput"
+          id="search"
           type="text"
           placeholder="Nom, organe, maladie..."
         />
       </div>
 
       <div class="field">
-        <label for="categoryFilter">Catégorie</label>
-        <select id="categoryFilter">
-          <option value="all">Toutes</option>
-          <option value="Organe">Organes</option>
-          <option value="Maladie">Maladies</option>
-          <option value="Autre">Autre</option>
+        <label for="category">Catégorie</label>
+        <select id="category">
+          <option value="Toutes">Toutes</option>
+          <option value="Maladies" selected>Maladies</option>
         </select>
       </div>
+
+      <p class="count">
+        Fréquences chargées : <span id="freq-count">0</span>
+      </p>
     </section>
 
-    <main>
-      <div id="status" class="status"></div>
-      <div id="frequencies
-        List" class="frequencies-list">
-        <!-- Les cartes de fréquences seront injectées ici par app.js -->
-      </div>
-    </main>
+    <section id="freq-list" class="cards">
+      <!-- Cartes insérées par app.js -->
+    </section>
 
-    <footer class="footer">
-      <span>${item.duration_minutes}min</span>
-    </footer>
-  </div>
+    <section class="disclaimer">
+      <p>
+        Les fréquences présentes dans cette application sont expérimentales,
+        sans valeur médicale reconnue. Elles ne remplacent jamais un avis ni un traitement
+        d’un professionnel de la santé.
+      </p>
+    </section>
+  </main>
 
   <script src="app.js"></script>
 </body>
