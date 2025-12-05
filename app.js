@@ -23,6 +23,10 @@ const FREQUENCIES = [
   { id:"mal_burnout", name:"Burn-out", category:"Maladies", type:"MALADIES", frequency:470, duration:26, description:"Fatigue nerveuse." }
 ];
 
+// map id -> freq pour l’animation
+const FREQ_BY_ID = {};
+FREQUENCIES.forEach(f => { FREQ_BY_ID[f.id] = f.frequency; });
+
 // ==================== AUDIO ====================
 
 let audioCtx = null;
@@ -44,8 +48,6 @@ async function startTone(freq) {
   osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
   osc.connect(audioCtx.destination);
   osc.start();
-
-  currentWaveFrequency = freq; // pour l’animation eau
 }
 
 function stopTone() {
@@ -54,7 +56,6 @@ function stopTone() {
     osc.disconnect();
     osc = null;
   }
-  currentWaveFrequency = 0;
 }
 
 // ==================== UI / FILTRES ====================
@@ -65,7 +66,7 @@ const searchEl = document.querySelector("#search");
 const categoryEl = document.querySelector("#category");
 
 let filtered = FREQUENCIES.slice();
-let currentPlaying = null;
+let currentPlaying = null; // id de la carte en lecture
 
 function renderList() {
   countEl.textContent = filtered.length;
@@ -77,17 +78,30 @@ function renderList() {
 
   listEl.innerHTML = filtered.map(item => `
     <article class="card ${currentPlaying === item.id ? "card--active" : ""}">
-      <div class="card-header">
-        <h2 class="card-title">${item.name}</h2>
-        <span class="card-category">${item.type}</span>
-      </div>
+      <div class="card-body">
+        <div class="card-main">
+          <div class="card-header">
+            <h2 class="card-title">${item.name}</h2>
+            <span class="card-category">${item.type}</span>
+          </div>
 
-      <div class="card-meta">
-        <span>${item.frequency} Hz</span>
-        <span>${item.duration} min</span>
-      </div>
+          <div class="card-meta">
+            <span>${item.frequency} Hz</span>
+            <span>${item.duration} min</span>
+          </div>
 
-      <p class="card-description">${item.description}</p>
+          <p class="card-description">${item.description}</p>
+        </div>
+
+        <div class="card-visual">
+          <canvas
+            class="card-water"
+            data-id="${item.id}"
+            width="110"
+            height="80"
+          ></canvas>
+        </div>
+      </div>
 
       <div class="card-actions">
         <button class="btn btn-start" data-id="${item.id}">Démarrer</button>
@@ -115,6 +129,7 @@ function applyFilters() {
   renderList();
 }
 
+// clics sur les boutons
 document.addEventListener("click", e => {
   const startBtn = e.target.closest(".btn-start");
   const stopBtn = e.target.closest(".btn-stop");
@@ -139,22 +154,11 @@ document.addEventListener("click", e => {
 searchEl.addEventListener("input", applyFilters);
 categoryEl.addEventListener("change", applyFilters);
 
-// ==================== ANIMATION EAU ====================
+// ==================== ANIMATION EAU PAR CARTE ====================
 
-const canvas = document.getElementById("water-canvas");
-const ctx = canvas ? canvas.getContext("2d") : null;
-let currentWaveFrequency = 0; // en Hz
 let startTime = null;
 
-function drawWater(timestamp) {
-  if (!ctx || !canvas) return;
-
-  if (!startTime) startTime = timestamp;
-  const t = (timestamp - startTime) / 1000; // secondes
-
-  const w = canvas.width;
-  const h = canvas.height;
-
+function drawWaveOnCanvas(ctx, w, h, freq, t) {
   // fond
   const grad = ctx.createLinearGradient(0, 0, 0, h);
   grad.addColorStop(0, "#020617");
@@ -162,35 +166,46 @@ function drawWater(timestamp) {
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, w, h);
 
-  // si aucune fréquence : juste une légère ondulation
-  const freq = currentWaveFrequency || 120; // valeur de base
-  const speed = freq / 90;
-  const spatial = freq / 90;
+  // si pas de fréquence, petite ondulation lente
+  const active = freq > 0;
+  const baseFreq = active ? freq : 100;
+  const speed = active ? baseFreq / 90 : 0.3;
+  const spatial = active ? (2 + baseFreq / 200) : 1.5;
 
   const baseY = h / 2;
-  const amplitude = h * 0.22;
+  const amp = h * (active ? 0.3 : 0.15);
 
   ctx.beginPath();
   for (let x = 0; x <= w; x++) {
     const phase = (x / w) * Math.PI * 2 * spatial + t * speed;
-    const y = baseY + Math.sin(phase) * amplitude;
+    const y = baseY + Math.sin(phase) * amp;
     if (x === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   }
-  ctx.strokeStyle = "rgba(80, 180, 255, 0.9)";
-  ctx.lineWidth = 3;
+  ctx.strokeStyle = active
+    ? "rgba(80, 180, 255, 0.95)"
+    : "rgba(80, 180, 255, 0.45)";
+  ctx.lineWidth = active ? 2.4 : 1.6;
   ctx.stroke();
-
-  // reflet en dessous
-  ctx.fillStyle = "rgba(80, 180, 255, 0.14)";
-  ctx.fillRect(0, baseY, w, h - baseY);
-
-  requestAnimationFrame(drawWater);
 }
 
-if (ctx) {
-  requestAnimationFrame(drawWater);
+function loopWater(timestamp) {
+  if (!startTime) startTime = timestamp;
+  const t = (timestamp - startTime) / 1000;
+
+  const canvases = document.querySelectorAll(".card-water");
+  canvases.forEach(cv => {
+    const ctx = cv.getContext("2d");
+    if (!ctx) return;
+    const id = cv.dataset.id;
+    const freq = (currentPlaying === id) ? (FREQ_BY_ID[id] || 0) : 0;
+    drawWaveOnCanvas(ctx, cv.width, cv.height, freq, t);
+  });
+
+  requestAnimationFrame(loopWater);
 }
+
+requestAnimationFrame(loopWater);
 
 // ==================== INIT ====================
 
