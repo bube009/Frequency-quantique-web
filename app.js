@@ -1,4 +1,4 @@
-// ==================== DONNÉES INTERNES (pas de JSON externe) ====================
+// ==================== DONNÉES ====================
 
 const FREQUENCIES = [
   { id:"mal_stress_general", name:"Stress – Général", category:"Maladies", type:"MALADIES", frequency:396, duration:15, description:"Exemple de signal pour stress général." },
@@ -33,17 +33,19 @@ async function startTone(freq) {
     const AC = window.AudioContext || window.webkitAudioContext;
     audioCtx = new AC();
   }
-
-  if (audioCtx.state === "suspended") await audioCtx.resume();
+  if (audioCtx.state === "suspended") {
+    await audioCtx.resume();
+  }
 
   stopTone();
 
   osc = audioCtx.createOscillator();
-  osc.frequency.value = freq;
   osc.type = "sine";
-
+  osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
   osc.connect(audioCtx.destination);
   osc.start();
+
+  currentWaveFrequency = freq; // pour l’animation eau
 }
 
 function stopTone() {
@@ -52,9 +54,10 @@ function stopTone() {
     osc.disconnect();
     osc = null;
   }
+  currentWaveFrequency = 0;
 }
 
-// ==================== INTERFACE ====================
+// ==================== UI / FILTRES ====================
 
 const listEl = document.querySelector("#freq-list");
 const countEl = document.querySelector("#freq-count");
@@ -68,7 +71,7 @@ function renderList() {
   countEl.textContent = filtered.length;
 
   if (filtered.length === 0) {
-    listEl.innerHTML = "<p>Aucune fréquence trouvée.</p>";
+    listEl.innerHTML = "<p style='opacity:0.8;font-size:0.85rem;'>Aucune fréquence trouvée.</p>";
     return;
   }
 
@@ -95,7 +98,7 @@ function renderList() {
 }
 
 function applyFilters() {
-  const q = searchEl.value.toLowerCase();
+  const q = searchEl.value.trim().toLowerCase();
   const category = categoryEl.value;
 
   filtered = FREQUENCIES.filter(f => {
@@ -119,7 +122,6 @@ document.addEventListener("click", e => {
   if (startBtn) {
     const id = startBtn.dataset.id;
     const item = FREQUENCIES.find(f => f.id === id);
-
     if (!item) return;
 
     currentPlaying = id;
@@ -137,6 +139,59 @@ document.addEventListener("click", e => {
 searchEl.addEventListener("input", applyFilters);
 categoryEl.addEventListener("change", applyFilters);
 
+// ==================== ANIMATION EAU ====================
+
+const canvas = document.getElementById("water-canvas");
+const ctx = canvas ? canvas.getContext("2d") : null;
+let currentWaveFrequency = 0; // en Hz
+let startTime = null;
+
+function drawWater(timestamp) {
+  if (!ctx || !canvas) return;
+
+  if (!startTime) startTime = timestamp;
+  const t = (timestamp - startTime) / 1000; // secondes
+
+  const w = canvas.width;
+  const h = canvas.height;
+
+  // fond
+  const grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, "#020617");
+  grad.addColorStop(1, "#050816");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+
+  // si aucune fréquence : juste une légère ondulation
+  const freq = currentWaveFrequency || 120; // valeur de base
+  const speed = freq / 90;
+  const spatial = freq / 90;
+
+  const baseY = h / 2;
+  const amplitude = h * 0.22;
+
+  ctx.beginPath();
+  for (let x = 0; x <= w; x++) {
+    const phase = (x / w) * Math.PI * 2 * spatial + t * speed;
+    const y = baseY + Math.sin(phase) * amplitude;
+    if (x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = "rgba(80, 180, 255, 0.9)";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // reflet en dessous
+  ctx.fillStyle = "rgba(80, 180, 255, 0.14)";
+  ctx.fillRect(0, baseY, w, h - baseY);
+
+  requestAnimationFrame(drawWater);
+}
+
+if (ctx) {
+  requestAnimationFrame(drawWater);
+}
+
 // ==================== INIT ====================
 
-renderList();
+applyFilters();
