@@ -1,66 +1,142 @@
-// ==================== DONNÉES ====================
+// ==================== DONNÉES INTERNES (pas de JSON externe) ====================
 
 const FREQUENCIES = [
-  {
-    id: "mal_stress_general",
-    name: "Stress – Général",
-    category: "Maladies",
-    type: "MALADIES",
-    frequency: 396,
-    duration: 15,
-    description:
-      "Exemple de signal pour le stress général (usage expérimental, sans valeur médicale)."
-  },
-  {
-    id: "mal_depression_legere",
-    name: "Dépression légère",
-    category: "Maladies",
-    type: "MALADIES",
-    frequency: 639,
-    duration: 20,
-    description:
-      "Signal test pour soutenir l’humeur (sans preuve médicale, expérimental)."
-  },
-  {
-    id: "mal_douleur_chronique",
-    name: "Douleur chronique",
-    category: "Maladies",
-    type: "MALADIES",
-    frequency: 285,
-    duration: 18,
-    description:
-      "Signal de test pour les douleurs persistantes (usage expérimental uniquement)."
-  },
-  {
-    id: "mal_migraine_aigue",
-    name: "Migraine aiguë",
-    category: "Maladies",
-    type: "MALADIES",
-    frequency: 528,
-    duration: 15,
-    description:
-      "Exemple de fréquence pour expérimenter sur les migraines (non médical)."
-  },
-  {
-    id: "mal_insomnie",
-    name: "Insomnie",
-    category: "Maladies",
-    type: "MALADIES",
-    frequency: 432,
-    duration: 30,
-    description:
-      "Signal relaxant pour troubles du sommeil (test audio, sans valeur thérapeutique prouvée)."
-  },
-  {
-    id: "mal_anxiete_intense",
-    name: "Anxiété intense",
-    category: "Maladies",
-    type: "MALADIES",
-    frequency: 417,
-    duration: 20,
-    description:
-      "Fréquence expérimentale pour états anxieux (pas un traitement médical)."
-  },
-  {
-    id: "mal_fatigue_extreme",
-    name: "Fat
+  { id:"mal_stress_general", name:"Stress – Général", category:"Maladies", type:"MALADIES", frequency:396, duration:15, description:"Exemple de signal pour stress général." },
+  { id:"mal_depression_legere", name:"Dépression légère", category:"Maladies", type:"MALADIES", frequency:639, duration:20, description:"Soutien léger de l’humeur." },
+  { id:"mal_douleur_chronique", name:"Douleur chronique", category:"Maladies", type:"MALADIES", frequency:285, duration:18, description:"Test pour douleurs persistantes." },
+  { id:"mal_migraine_aigue", name:"Migraine aiguë", category:"Maladies", type:"MALADIES", frequency:528, duration:15, description:"Fréquence expérimentale migraine." },
+  { id:"mal_insomnie", name:"Insomnie", category:"Maladies", type:"MALADIES", frequency:432, duration:30, description:"Relaxation du sommeil." },
+  { id:"mal_anxiete_intense", name:"Anxiété intense", category:"Maladies", type:"MALADIES", frequency:417, duration:20, description:"Fréquence anti-anxiété expérimentale." },
+  { id:"mal_fatigue_extreme", name:"Fatigue extrême", category:"Maladies", type:"MALADIES", frequency:444, duration:25, description:"Pour fatigue profonde." },
+  { id:"mal_inflammation_chronique", name:"Inflammation chronique", category:"Maladies", type:"MALADIES", frequency:272, duration:22, description:"Inflammation test." },
+  { id:"mal_troubles_digestifs", name:"Troubles digestifs", category:"Maladies", type:"MALADIES", frequency:380, duration:18, description:"Inconfort digestif." },
+  { id:"mal_recuperation_post_op", name:"Récupération post-opératoire", category:"Maladies", type:"MALADIES", frequency:555, duration:25, description:"Récupération énergétique." },
+  { id:"mal_hypertension", name:"Hypertension", category:"Maladies", type:"MALADIES", frequency:462, duration:20, description:"Soutien pression sanguine." },
+  { id:"mal_diabete", name:"Diabète", category:"Maladies", type:"MALADIES", frequency:510, duration:24, description:"Équilibre métabolique." },
+  { id:"mal_douleurs_articulaires", name:"Douleurs articulaires", category:"Maladies", type:"MALADIES", frequency:294, duration:20, description:"Articulations test." },
+  { id:"mal_fibromyalgie", name:"Fibromyalgie", category:"Maladies", type:"MALADIES", frequency:333, duration:28, description:"Soutien énergétique fibromyalgie." },
+  { id:"mal_cancer_soutien", name:"Cancer (soutien)", category:"Maladies", type:"MALADIES", frequency:600, duration:30, description:"Fréquence symbolique." },
+  { id:"mal_troubles_immunitaires", name:"Troubles immunitaires", category:"Maladies", type:"MALADIES", frequency:488, duration:22, description:"Harmonisation immunitaire." },
+  { id:"mal_allergies_saison", name:"Allergies saisonnières", category:"Maladies", type:"MALADIES", frequency:372, duration:18, description:"Allergies test." },
+  { id:"mal_troubles_respiratoires", name:"Troubles respiratoires", category:"Maladies", type:"MALADIES", frequency:320, duration:20, description:"Respiration." },
+  { id:"mal_addictions", name:"Addictions", category:"Maladies", type:"MALADIES", frequency:540, duration:21, description:"Accompagnement addictions." },
+  { id:"mal_burnout", name:"Burn-out", category:"Maladies", type:"MALADIES", frequency:470, duration:26, description:"Fatigue nerveuse." }
+];
+
+// ==================== AUDIO ====================
+
+let audioCtx = null;
+let osc = null;
+
+async function startTone(freq) {
+  if (!audioCtx) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    audioCtx = new AC();
+  }
+
+  if (audioCtx.state === "suspended") await audioCtx.resume();
+
+  stopTone();
+
+  osc = audioCtx.createOscillator();
+  osc.frequency.value = freq;
+  osc.type = "sine";
+
+  osc.connect(audioCtx.destination);
+  osc.start();
+}
+
+function stopTone() {
+  if (osc) {
+    try { osc.stop(); } catch(e){}
+    osc.disconnect();
+    osc = null;
+  }
+}
+
+// ==================== INTERFACE ====================
+
+const listEl = document.querySelector("#freq-list");
+const countEl = document.querySelector("#freq-count");
+const searchEl = document.querySelector("#search");
+const categoryEl = document.querySelector("#category");
+
+let filtered = FREQUENCIES.slice();
+let currentPlaying = null;
+
+function renderList() {
+  countEl.textContent = filtered.length;
+
+  if (filtered.length === 0) {
+    listEl.innerHTML = "<p>Aucune fréquence trouvée.</p>";
+    return;
+  }
+
+  listEl.innerHTML = filtered.map(item => `
+    <article class="card ${currentPlaying === item.id ? "card--active" : ""}">
+      <div class="card-header">
+        <h2 class="card-title">${item.name}</h2>
+        <span class="card-category">${item.type}</span>
+      </div>
+
+      <div class="card-meta">
+        <span>${item.frequency} Hz</span>
+        <span>${item.duration} min</span>
+      </div>
+
+      <p class="card-description">${item.description}</p>
+
+      <div class="card-actions">
+        <button class="btn btn-start" data-id="${item.id}">Démarrer</button>
+        <button class="btn btn-stop" data-id="${item.id}">Arrêter</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function applyFilters() {
+  const q = searchEl.value.toLowerCase();
+  const category = categoryEl.value;
+
+  filtered = FREQUENCIES.filter(f => {
+    const matchesText =
+      f.name.toLowerCase().includes(q) ||
+      f.description.toLowerCase().includes(q);
+
+    const matchesCategory =
+      category === "Toutes" || f.category === category;
+
+    return matchesText && matchesCategory;
+  });
+
+  renderList();
+}
+
+document.addEventListener("click", e => {
+  const startBtn = e.target.closest(".btn-start");
+  const stopBtn = e.target.closest(".btn-stop");
+
+  if (startBtn) {
+    const id = startBtn.dataset.id;
+    const item = FREQUENCIES.find(f => f.id === id);
+
+    if (!item) return;
+
+    currentPlaying = id;
+    startTone(item.frequency);
+    renderList();
+  }
+
+  if (stopBtn) {
+    stopTone();
+    currentPlaying = null;
+    renderList();
+  }
+});
+
+searchEl.addEventListener("input", applyFilters);
+categoryEl.addEventListener("change", applyFilters);
+
+// ==================== INIT ====================
+
+renderList();
