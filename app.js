@@ -1,123 +1,20 @@
-// toutes les fréquences chargées depuis le JSON
-let allFrequencies = []; // ou le nom que tu utilises déjà
-let audioCtx = null;
-let currentOsc = null;
+// ================== Config ==================
 
-function startTone(freqHz) {
-  // on arrête la précédente
-  stopTone();
+const DATA_URL = "frequencies.json"; // adapte si ton JSON est ailleurs
 
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
+// Sélecteurs DOM (adapte les IDs en fonction de ton HTML)
+const listEl = document.querySelector("#frequency-list");
+const countEl = document.querySelector("#frequency-count");
+const searchEl = document.querySelector("#search-input");
+const categoryEl = document.querySelector("#category-select");
 
-  const osc = audioCtx.createOscillator();
-  osc.type = 'sine';
-  osc.frequency.setValueAtTime(freqHz, audioCtx.currentTime);
-  osc.connect(audioCtx.destination);
-  osc.start();
+// ================== État global ==================
 
-  currentOsc = osc;
-}
+let allFrequencies = [];   // toutes les fréquences du JSON
+let filtered = [];         // fréquences après filtre recherche + catégorie
+let currentCardId = null;  // id de la carte actuellement en lecture
 
-function stopTone() {
-  if (currentOsc) {
-    try {
-      currentOsc.stop();
-    } catch (e) {}
-    currentOsc.disconnect();
-    currentOsc = null;
-  }
-}
-
-// gestion globale des clics sur les boutons
-document.addEventListener("click", (e) => {
-  const startBtn = e.target.closest(".btn-start");
-  const stopBtn  = e.target.closest(".btn-stop");
-
-  if (startBtn) {
-    const id = startBtn.dataset.id;
-
-    // 🔥 on cherche la bonne entrée dans le JSON
-    const item = allFrequencies.find((f) => f.id === id);
-    if (!item) return;
-
-    // et on joue SA fréquence
-    startTone(item.frequency);
-  }
-
-  if (stopBtn) {
-    stopTone();
-  }
-});
-    .join("");
-}
-
-// ----------- Audio (Web Audio API simple) ----------- //
-
-function ensureAudioContext() {
-  if (!audioCtx) {
-    const Ctor = window.AudioContext || window.webkitAudioContext;
-    if (!Ctor) {
-      alert("Web Audio non supporté sur ce navigateur.");
-      return null;
-    }
-    audioCtx = new Ctor();
-  }
-  return audioCtx;
-}
-
-function startFrequency(item) {
-  const ctx = ensureAudioContext();
-  if (!ctx) return;
-
-  stopCurrent(); // stop si un autre joue
-
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-
-  osc.type = "sine";
-  osc.frequency.value = item.frequency_hz || 440;
-
-  // volume modéré
-  gain.gain.value = 0.15;
-
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-
-  osc.start();
-
-  currentOsc = osc;
-  currentCardId = item.id;
-  highlightCurrentCard();
-}
-
-function stopCurrent() {
-  if (currentOsc) {
-    try {
-      currentOsc.stop();
-    } catch (e) {
-      console.warn("Osc déjà stoppé:", e);
-    }
-    currentOsc.disconnect();
-    currentOsc = null;
-    currentCardId = null;
-    highlightCurrentCard();
-  }
-}
-
-function highlightCurrentCard() {
-  document
-    .querySelectorAll(".card")
-    .forEach((el) => el.classList.remove("playing"));
-
-  if (!currentCardId) return;
-
-  const el = document.querySelector(`.card[data-id="${currentCardId}"]`);
-  if (el) el.classList.add("playing");
-}
-
-// ----------- Utilitaire ----------- //
+// ================== Utilitaires ==================
 
 function escapeHtml(str) {
   if (!str) return "";
@@ -129,56 +26,188 @@ function escapeHtml(str) {
     .replace(/'/g, "&#039;");
 }
 
-// ----------- Événements UI ----------- //
+// ================== Audio (Web Audio API simple) ==================
 
-// Recherche & filtre
-searchEl.addEventListener("input", () => {
-  renderList();
-});
+let audioCtx = null;
+let currentOsc = null;
 
-categoryEl.addEventListener("change", () => {
-  renderList();
-});
+function startTone(freqHz) {
+  // Stop précédent
+  stopTone();
 
-// Délégation des clics Start/Stop
-listEl.addEventListener("click", (event) => {
-  const startBtn = event.target.closest(".btn-start");
-  const stopBtn = event.target.closest(".btn-stop");
-
-  if (startBtn) {
-    const id = startBtn.dataset.id;
-    const item = allFrequencies.find((f) => f.id === id);
-    if (item) {
-      startFrequency(item);
-    }
-  } else if (stopBtn) {
-    const id = stopBtn.dataset.id;
-    if (id === currentCardId) {
-      // on arrête seulement si c'est la fréquence en cours
-      stopCurrent();
-    }
+  if (!audioCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    audioCtx = new AudioContext();
   }
-});
 
-// ----------- Init ----------- //
+  const osc = audioCtx.createOscillator();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(freqHz, audioCtx.currentTime);
+  osc.connect(audioCtx.destination);
+  osc.start();
 
-loadFrequencies();
+  currentOsc = osc;
+}
+
+function stopTone() {
+  if (currentOsc) {
+    try {
+      currentOsc.stop();
+    } catch (e) {
+      // ignore
+    }
+    currentOsc.disconnect();
+    currentOsc = null;
+  }
+}
+
+// ================== Rendu des cartes ==================
+
+function renderList() {
+  if (!listEl || !countEl) return;
+
+  // compteur
+  countEl.textContent = filtered.length.toString();
+
+  if (filtered.length === 0) {
+    listEl.innerHTML =
+      '<p style="opacity:0.8;font-size:0.85rem;">Aucune fréquence trouvée pour ces filtres.</p>';
+    return;
+  }
+
+  listEl.innerHTML = filtered
+    .map((item) => {
+      const isActive = item.id === currentCardId;
+
+      return `
+<article class="card ${isActive ? "card--active" : ""}" data-id="${item.id}">
+  <div class="card-header">
+    <h2 class="card-title">${escapeHtml(item.name)}</h2>
+    <span class="card-category">${escapeHtml(item.type || item.category || "")}</span>
+  </div>
+
+  <div class="card-meta">
+    <span>${item.frequency} Hz</span>
+    ${
+      item.duration
+        ? `<span>${item.duration} min</span>`
+        : ""
+    }
+  </div>
+
+  ${
+    item.description
+      ? `<p class="card-description">${escapeHtml(item.description)}</p>`
+      : ""
+  }
+
+  <div class="card-actions">
+    <button class="btn btn-start" data-id="${item.id}">Démarrer</button>
+    <button class="btn btn-stop secondary" data-id="${item.id}">Arrêter</button>
+  </div>
+</article>
+`;
+    })
+    .join("");
+}
+
+// ================== Filtres (recherche + catégorie) ==================
+
+function applyFilters() {
+  const q = (searchEl ? searchEl.value : "").trim().toLowerCase();
+  const category = categoryEl ? categoryEl.value : "Toutes";
+
+  filtered = allFrequencies.filter((item) => {
+    // filtre catégorie
+    if (category && category !== "Toutes" && item.category !== category) {
+      return false;
+    }
+
+    // filtre recherche texte
+    if (q) {
+      const haystack = (
+        (item.name || "") +
+        " " +
+        (item.description || "") +
+        " " +
+        (item.category || "") +
+        " " +
+        (item.type || "")
+      ).toLowerCase();
+
+      if (!haystack.includes(q)) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+
+  renderList();
+}
+
+// ================== Gestion des clics start/stop ==================
+
 document.addEventListener("click", (e) => {
   const startBtn = e.target.closest(".btn-start");
-  const stopBtn  = e.target.closest(".btn-stop");
+  const stopBtn = e.target.closest(".btn-stop");
 
   if (startBtn) {
     const id = startBtn.dataset.id;
-
-    // on cherche la bonne entrée dans toutes les fréquences
     const item = allFrequencies.find((f) => f.id === id);
     if (!item) return;
 
-    // et on joue SA fréquence
-    startTone(item.frequency);
+    currentCardId = id;         // pour mettre la carte en "active"
+    startTone(item.frequency);  //  ici on utilise la bonne fréquence
+    renderList();               // re-render pour maj état visuel
   }
 
   if (stopBtn) {
     stopTone();
+    currentCardId = null;
+    renderList();
   }
 });
+
+// ================== Chargement du JSON ==================
+
+async function loadFrequencies() {
+  try {
+    const res = await fetch(DATA_URL);
+    if (!res.ok) {
+      throw new Error("Impossible de charger les fréquences");
+    }
+    const data = await res.json();
+
+    // On suppose que data est soit un tableau direct,
+    // soit un objet { frequencies: [...] }
+    allFrequencies = Array.isArray(data) ? data : data.frequencies || [];
+
+    filtered = allFrequencies.slice();
+    renderList();
+  } catch (err) {
+    console.error(err);
+    if (listEl) {
+      listEl.innerHTML =
+        '<p style="opacity:0.8;font-size:0.85rem;color:#ffb3b3;">Erreur de chargement des fréquences.</p>';
+    }
+  }
+}
+
+// ================== Listeners de filtre ==================
+
+if (searchEl) {
+  searchEl.addEventListener("input", () => {
+    applyFilters();
+  });
+}
+
+if (categoryEl) {
+  categoryEl.addEventListener("change", () => {
+    applyFilters();
+  });
+}
+
+// ================== Init ==================
+
+loadFrequencies();
