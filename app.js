@@ -158,7 +158,7 @@ document.addEventListener("click", (e) => {
     if (!item) return;
 
     currentCardId = id;         // pour mettre la carte en "active"
-    startTone(item.frequency);  //  ici on utilise la bonne fréquence
+    startTone(item.frequencies);  //  ici on utilise la bonne fréquence
     renderList();               // re-render pour maj état visuel
   }
 
@@ -177,7 +177,7 @@ async function loadFrequencies() {
     if (!res.ok) {
       throw new Error("Impossible de charger les fréquences");
     }
-    const data = await res.json();
+    const data = await  un frequencie.json();
 
     // On suppose que data est soit un tableau direct,
     // soit un objet { frequencies: [...] }
